@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SR39_2021_POP2022.Models
+namespace SR39_2021_POP2022_2.Models
 {
     [Serializable]
     class Address
