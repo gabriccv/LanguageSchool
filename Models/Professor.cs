@@ -8,17 +8,25 @@ using System.Threading.Tasks;
 namespace SR39_2021_pop2022_2.Models
 {
     [Serializable]
-    class Professor
+    public class Professor : ICloneable
     {
         [NonSerialized]
         private User user;
 
         public User User { get => user; set => user = value; }
         public string UserId { get; set; }
+        public object Clone()
+        {
+            return new Professor
+            {
+                User = User.Clone() as User
+            };
+        }
 
         public override string ToString()
         {
             return $"[Professor] {User.FirstName} {User.LastName}, {User.Email}";
         }
+
     }
 }

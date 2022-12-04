@@ -11,8 +11,8 @@ using SR39_2021_pop2022_2.CustomException;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
-    namespace SR39_2021_POP2022.Repositories
-    {
+    
+    
         class UserRepository : IUserRepository, IFilePersistence
         {
             private static List<User> users;
@@ -88,5 +88,5 @@ namespace SR39_2021_pop2022_2.Repositories
                 }
             }
         }
-    }
+    
 }

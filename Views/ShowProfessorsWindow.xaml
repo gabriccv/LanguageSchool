@@ -18,9 +18,11 @@
               >
             <MenuItem Name="miAddProfessor" Height="30" Header="Add professor" Click="miAddProfessor_Click"></MenuItem>
             <MenuItem Name="miUpdateProfessor" Height="30" Header="Update professor" Click="miUpdateProfessor_Click"></MenuItem>
-        </Menu>
-        <TextBox Grid.Column="0" Margin="5,5,5,5" Width="350" HorizontalAlignment="Left" VerticalAlignment="Center" />
+            <MenuItem Name="miDeleteProfessor" Height="30" Header="Delete professor" Click="miDeleteProfessor_Click"></MenuItem>
 
+        </Menu>
+        
+        
         <DataGrid CanUserAddRows="False" 
                   IsReadOnly="True" 
                   Grid.Row="1" 

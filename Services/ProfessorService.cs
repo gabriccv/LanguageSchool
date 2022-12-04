@@ -1,7 +1,9 @@
 ﻿using SR39_2021_pop2022_2.Models;
-using SR39_2021_POP2022_2.Models;
-using SR39_2021_pop2022_2.Repositories.SR39_2021_POP2022.Repositories;
+
 using SR39_2021_pop2022_2.Repositories;
+//using SR39_2021_pop2022_2.Repositories.SR39_2021_POP2022_2.Repositories;
+using SR39_2021_POP2022_2.Models;
+
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -45,20 +47,11 @@ namespace SR39_2021_pop2022_2.Services
             return professorRepository.GetAll().Where(p => p.User.IsActive).OrderBy(p => p.User.Email).ToList();
         }
 
-        public void Add(User user)
-        {
-            userRepository.Add(user);
-
-            var professor = new Professor
-            {
-                User = user,
-                UserId = user.Email
-
-            };
-
-            professorRepository.Add(professor);
-        }
-
+        //public void Add(Professor professor)
+        //{
+        //    userRepository.Add(professor.User);
+        //    professorRepository.Add(professor);
+        //}
         public void Set(List<Professor> professors)
         {
             professorRepository.Set(professors);
@@ -79,6 +72,20 @@ namespace SR39_2021_pop2022_2.Services
         public List<User> ListAllStudents()
         {
             throw new NotImplementedException();
+        }
+
+        public void Add(User user)
+        {
+            userRepository.Add(user);
+
+            var professor = new Professor
+            {
+                User = user,
+                UserId = user.Email
+
+            };
+
+            professorRepository.Add(professor);
         }
     }
 }

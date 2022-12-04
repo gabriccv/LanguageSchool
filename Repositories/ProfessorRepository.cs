@@ -16,6 +16,7 @@ namespace SR39_2021_pop2022_2.Repositories
 
         public void Add(Professor professor)
         {
+            
             professors.Add(professor);
             Save();
         }

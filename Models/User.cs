@@ -1,6 +1,7 @@
 ﻿using SR39_2021_pop2022_2.Models;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -10,7 +11,7 @@ namespace SR39_2021_POP2022_2.Models
 {
 
     [Serializable]
-    class User
+    public class User : ICloneable
     {
         public string Email { get; set; }
         public string Password { get; set; }
@@ -32,6 +33,21 @@ namespace SR39_2021_POP2022_2.Models
         public override string ToString()
         {
             return $"[User] {FirstName} {LastName}, {Email}";
+        }
+        public object Clone()
+        {
+            return new User
+            {
+                Email = Email,
+                Password = Password,
+                FirstName = FirstName,
+                LastName = LastName,
+                JMBG = JMBG,
+                UserType = UserType,
+                Gender = Gender,
+                IsActive = IsActive,
+                Address = Address?.Clone() as Address
+            };
         }
     }
 }

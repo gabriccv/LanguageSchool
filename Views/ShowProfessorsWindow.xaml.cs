@@ -1,4 +1,5 @@
 ﻿using SR39_2021_pop2022_2.Models;
+using SR39_2021_pop2022_2.Services;
 using SR39_2021_POP2022_2.Models;
 using System;
 using System.Collections.Generic;
@@ -21,10 +22,12 @@ namespace SR39_2021_pop2022_2.Views
     /// </summary>
     public partial class ShowProfessorsWindow : Window
     {
+        private ProfessorService professorService = new ProfessorService();
+
         public ShowProfessorsWindow()
         {
             InitializeComponent();
-            List<User> users = Data.Instance.ProfessorService.GetAll()
+            List<User> users = Data.Instance.ProfessorService.GetActiveProfessors()
                 .Select(p => p.User).ToList();
             dgProfessors.ItemsSource = users;
         }
@@ -37,7 +40,7 @@ namespace SR39_2021_pop2022_2.Views
 
             if ((bool)successeful)
             {
-                List<User> users = Data.Instance.ProfessorService.GetAll()
+                List<User> users = Data.Instance.ProfessorService.GetActiveProfessors()
                 .Select(p => p.User).ToList();
                 dgProfessors.ItemsSource = users;
             }
@@ -45,8 +48,53 @@ namespace SR39_2021_pop2022_2.Views
 
         private void miUpdateProfessor_Click(object sender, RoutedEventArgs e)
         {
+            var selectedIndex = dgProfessors.SelectedIndex;
+
+            if (selectedIndex >= 0)
+            {
+                var professors = professorService.GetAll().Select(p=>p.User).ToList();
+
+                var addEditProfessorWindow = new AddEditProfessorsWindow(professors[selectedIndex]);
+
+                var successeful = addEditProfessorWindow.ShowDialog();
+
+                if ((bool)successeful)
+                {
+                    RefreshDataGrid();
+                }
+            }
+        }
+        private void miDeleteProfessor_Click(object sender, RoutedEventArgs e)
+        {
+            var selctedItem = ((User)dgProfessors.SelectedItem).Email;
+            if (selctedItem != null)
+            {
+                MessageBoxResult ms = MessageBox.Show("Da li ste sigurni da zelite da obrisete profesor", "", MessageBoxButton.YesNo);
+                {
+                    if (ms == MessageBoxResult.Yes)
+                    {
+                        Data.Instance.ProfessorService.Delete(selctedItem);
+                        List<User> users = Data.Instance.ProfessorService.GetActiveProfessors().Select(p => p.User).ToList();
+                        dgProfessors.ItemsSource = users;
+                    }
+                }
+            }
+        }
+        private void RefreshDataGrid()
+        {
+            List<User> users = professorService.GetAll().Select(p => p.User).ToList();
+            dgProfessors.ItemsSource = users;
 
         }
+        private void dgProfessors_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyName == "Error" || e.PropertyName == "IsValid")
+            {
+                e.Column.Visibility = Visibility.Collapsed;
+            }
+        }
+
+
         //private void txtSearch_KeyDown
     }
 }

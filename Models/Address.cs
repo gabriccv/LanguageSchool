@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 namespace SR39_2021_POP2022_2.Models
 {
     [Serializable]
-    class Address
+    public class Address : ICloneable
     {
         public int Id { get; set; }
         public string Street { get; set; }
@@ -15,6 +15,17 @@ namespace SR39_2021_POP2022_2.Models
         public string City { get; set; }
         public string Country { get; set; }
 
+        public object Clone()
+        {
+            return new Address
+            {
+                Id = Id,
+                Street = Street,
+                StreetNumber = StreetNumber,
+                City = City,
+                Country = Country
+            };
+        }
         public override string ToString()
         {
             return $"{Street} {StreetNumber}, {City}, {Country}";
