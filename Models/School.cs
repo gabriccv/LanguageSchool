@@ -7,19 +7,16 @@ using System.Threading.Tasks;
 
 namespace SR39_2021_pop2022_2.Models
 {
-
     [Serializable]
-    class Student
+    class School
     {
-        [NonSerialized]
-        private User user;
-
-        public User User { get => user; set => user = value; }
-        public string UserId { get; set; }
+        public string Name { get; set; }
+        public Address Address { get; set; }
+        public bool IsDeleted { get; set; }
 
         public override string ToString()
         {
-            return $"[Professor] {User.FirstName} {User.LastName}, {User.Email}";
+            return $"{Name}";
         }
     }
 }

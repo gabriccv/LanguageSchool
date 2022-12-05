@@ -7,11 +7,54 @@
         mc:Ignorable="d"
         Title="MainWindow" Height="450" Width="800">
     <Grid>
-        <Button Name="btnProfessors"
-                Click="btnProfessors_Click" Margin="412,90,204,258">Professors</Button>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+            <ColumnDefinition Width="Auto"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <Button Name="btnProfessor" 
+                Margin="5,5,5,5"
+                Width="150"
+                Height="40"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Grid.Column="0"
+                Click="btnProfessor_Click">Professor
+        </Button>
+        <Button Name="btnStudent" 
+                Width="150"
+                Height="40"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Grid.Column="1"
+                Click="btnStudent_Click" Margin="5,5,5,5">Student
+        </Button>
 
-        <Button Name="btnStudents"
-                Click="btnStudents_Click" Margin="123,90,493,258">Students</Button>
+        <Button Name="btnAddress" 
+                Width="150"
+                Height="40"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Grid.Column="2"
+                Click="btnAddress_Click" Margin="5,5,5,5">Address
+        </Button>
+        <Button Name="btnSchool" 
+                Width="150"
+                Height="40"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Grid.Column="3"
+                Margin="5,5,5,5" Click="btnSchool_Click">School
+        </Button>
+        <Button Name="btnClass" 
+                Width="150"
+                Height="40"
+                HorizontalAlignment="Left"
+                VerticalAlignment="Top"
+                Grid.Column="4"
+                Margin="5,5,5,5" Click="btnClass_Click">Classes</Button>
     </Grid>
 </Window>
     

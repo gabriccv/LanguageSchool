@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using SR39_2021_POP2022_2.Models;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
@@ -16,7 +17,6 @@ namespace SR39_2021_pop2022_2.Repositories
 
         public void Add(Professor professor)
         {
-            
             professors.Add(professor);
             Save();
         }
@@ -38,11 +38,25 @@ namespace SR39_2021_pop2022_2.Repositories
 
             if (professor != null)
             {
-                professor.User.IsActive = false;
+                //professor.User.IsActive = false;
+
+                professors.Remove(professor);
             }
 
             Save();
         }
+
+        //public void Delete(string email)
+        //{
+        //    Professor professor = GetById(email);
+
+        //    if (professor != null)
+        //    {
+        //        professor.User.IsActive = false;
+        //    }
+
+        //    Save();
+        //}
 
         public List<Professor> GetAll()
         {
@@ -59,6 +73,7 @@ namespace SR39_2021_pop2022_2.Repositories
             Save();
         }
 
+
         public void Save()
         {
             IFormatter formatter = new BinaryFormatter();
@@ -66,6 +81,13 @@ namespace SR39_2021_pop2022_2.Repositories
             {
                 formatter.Serialize(stream, professors);
             }
+        }
+
+        public List<User> Search(string sting)
+        {
+            string lowerTerm = sting.ToLower();
+            return Data.Instance.UserService.GetAll().Where(p => (p.FirstName.ToLower().Contains(lowerTerm)
+            || p.LastName.ToLower().Contains(lowerTerm)) && !p.IsActive).ToList();
         }
     }
 }

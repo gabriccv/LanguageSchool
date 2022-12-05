@@ -1,5 +1,4 @@
 ﻿using SR39_2021_pop2022_2.Models;
-using SR39_2021_POP2022_2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,21 +16,16 @@ using System.Windows.Shapes;
 namespace SR39_2021_pop2022_2.Views
 {
     /// <summary>
-    /// Interaction logic for AddStudentWindow.xaml
+    /// Interaction logic for AddClassWindow.xaml
     /// </summary>
-    public partial class AddEditStudentsWindow : Window
+    public partial class AddEditClassWindow : Window
     {
-        private User newUser;
-        public AddEditStudentsWindow()
+        private Class newClass;
+        public AddEditClassWindow()
         {
             InitializeComponent();
-            newUser = new User
-            {
-                UserType = EUserType.STUDENT,
-                IsActive = true
-
-            };
-            DataContext = newUser;
+            newClass = new Class();
+            DataContext = newClass;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -41,18 +35,9 @@ namespace SR39_2021_pop2022_2.Views
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Data.Instance.StudentService.Add(newUser);
+            Data.Instance.ClassService.Add(newClass);
             this.DialogResult = true;
             this.Close();
         }
     }
 }
-
-
-
-
-
-
-
-
-

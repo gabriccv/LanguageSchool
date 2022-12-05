@@ -16,9 +16,10 @@ namespace SR39_2021_pop2022_2.Models
         private static readonly Data instance = new Data();
         public IUserService UserService { get; set; }
         public IProfessorService ProfessorService { get; set; }
-
         public IStudentService StudentService { get; set; }
-
+        public IAddressService AddressService { get; set; }
+        public ISchoolService SchoolService { get; set; }
+        public IClassService ClassService { get; set; }
 
         static Data() { }
 
@@ -27,6 +28,9 @@ namespace SR39_2021_pop2022_2.Models
             UserService = new UserService();
             ProfessorService = new ProfessorService();
             StudentService = new StudentService();
+            AddressService = new AddressService();
+            SchoolService = new SchoolService();
+            ClassService = new ClassesService();
         }
 
         public static Data Instance
@@ -37,6 +41,7 @@ namespace SR39_2021_pop2022_2.Models
             }
         }
 
+
         public void Initialize()
         {
             Address address = new Address
@@ -45,7 +50,7 @@ namespace SR39_2021_pop2022_2.Models
                 Country = "Srbija",
                 Street = "ulica1",
                 StreetNumber = "22",
-                Id = 1
+                //Id = 1
             };
 
             User user1 = new User()
@@ -68,38 +73,24 @@ namespace SR39_2021_pop2022_2.Models
                 LastName = "Mikic",
                 JMBG = "121346",
                 Password = "zika",
-                Gender = EGender.FEMEALE,
+                Gender = EGender.FEMALE,
                 UserType = EUserType.PROFESSOR,
-                IsActive = true,
-                Address = address
-            };
-
-
-
-            User user3 = new User
-            {
-                Email = "joka@gmail.com",
-                FirstName = "Joka",
-                LastName = "Jokic",
-                JMBG = "1213467",
-                Password = "joki",
-                Gender = EGender.FEMEALE,
-                UserType = EUserType.STUDENT,
                 IsActive = true,
                 Address = address
             };
 
             UserService.Add(user1);
             ProfessorService.Add(user2);
-            StudentService.Add(user3);
         }
-
 
         public void LoadData()
         {
             var users = LoadUsers();
             var professors = LoadProfessors();
             var students = LoadStudents();
+            var addresses = LoadAddresses();
+            var schools = LoadSchools();
+            var classes = LoadClasses();
 
             foreach (var professor in professors)
             {
@@ -107,9 +98,17 @@ namespace SR39_2021_pop2022_2.Models
                 professor.User = user;
             }
 
+            foreach (var student in students)
+            {
+                var user = users.Find(u => u.Email == student.UserId);
+                student.User = user;
+            }
             UserService.Set(users);
             ProfessorService.Set(professors);
             StudentService.Set(students);
+            AddressService.Set(addresses);
+            SchoolService.Set(schools);
+            ClassService.Set(classes);
         }
 
         private List<User> LoadUsers()
@@ -159,6 +158,57 @@ namespace SR39_2021_pop2022_2.Models
             catch (Exception e)
             {
                 return new List<Student>();
+            }
+
+        }
+
+        private List<Address> LoadAddresses()
+        {
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                using (Stream stream = new FileStream(Config.addressesFilePath, FileMode.Open, FileAccess.Read))
+                {
+                    return (List<Address>)formatter.Deserialize(stream);
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<Address>();
+            }
+
+        }
+
+        private List<School> LoadSchools()
+        {
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                using (Stream stream = new FileStream(Config.schoolsFilePath, FileMode.Open, FileAccess.Read))
+                {
+                    return (List<School>)formatter.Deserialize(stream);
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<School>();
+            }
+
+        }
+
+        private List<Class> LoadClasses()
+        {
+            try
+            {
+                IFormatter formatter = new BinaryFormatter();
+                using (Stream stream = new FileStream(Config.classesFilePath, FileMode.Open, FileAccess.Read))
+                {
+                    return (List<Class>)formatter.Deserialize(stream);
+                }
+            }
+            catch (Exception e)
+            {
+                return new List<Class>();
             }
 
         }

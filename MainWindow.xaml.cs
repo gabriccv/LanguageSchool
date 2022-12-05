@@ -28,18 +28,39 @@ namespace SR39_2021_pop2022_2
             Data.Instance.LoadData();
         }
 
-        private void btnProfessors_Click(object sender, RoutedEventArgs e)
-        {
-            var professorsWindow = new ShowProfessorsWindow();
-            professorsWindow.Show();
-            this.Hide();
-        }
-
-        private void btnStudents_Click(object sender, RoutedEventArgs e)
+        private void btnStudent_Click(object sender, RoutedEventArgs e)
         {
             var studentsWindow = new ShowStudentsWindow();
             studentsWindow.Show();
-            this.Hide();
+            //Close();
+        }
+
+        private void btnProfessor_Click(object sender, RoutedEventArgs e)
+        {
+            var professorsWindow = new ShowProfessorsWindow();
+            professorsWindow.Show();
+            //Close();
+        }
+
+        private void btnAddress_Click(object sender, RoutedEventArgs e)
+        {
+            var addressWindow = new ShowAddressWindow();
+            addressWindow.Show();
+            //Close();
+        }
+
+        private void btnSchool_Click(object sender, RoutedEventArgs e)
+        {
+            var schoolWindow = new ShowSchoolsWindow();
+            schoolWindow.Show();
+            //Close();
+        }
+
+        private void btnClass_Click(object sender, RoutedEventArgs e)
+        {
+            var classWindow = new ShowClassesWindow();
+            classWindow.Show();
+            //Close();
         }
     }
 }

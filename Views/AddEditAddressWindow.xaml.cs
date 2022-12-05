@@ -17,21 +17,16 @@ using System.Windows.Shapes;
 namespace SR39_2021_pop2022_2.Views
 {
     /// <summary>
-    /// Interaction logic for AddStudentWindow.xaml
+    /// Interaction logic for AddAddressWindow.xaml
     /// </summary>
-    public partial class AddEditStudentsWindow : Window
+    public partial class AddEditAddressWindow : Window
     {
-        private User newUser;
-        public AddEditStudentsWindow()
+        private Address newAddress;
+        public AddEditAddressWindow()
         {
             InitializeComponent();
-            newUser = new User
-            {
-                UserType = EUserType.STUDENT,
-                IsActive = true
-
-            };
-            DataContext = newUser;
+            newAddress = new Address();
+            DataContext = newAddress;
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -41,18 +36,9 @@ namespace SR39_2021_pop2022_2.Views
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Data.Instance.StudentService.Add(newUser);
+            Data.Instance.AddressService.Add(newAddress);
             this.DialogResult = true;
             this.Close();
         }
     }
 }
-
-
-
-
-
-
-
-
-

@@ -9,23 +9,23 @@ namespace SR39_2021_POP2022_2.Models
     [Serializable]
     public class Address : ICloneable
     {
-        public int Id { get; set; }
         public string Street { get; set; }
         public string StreetNumber { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
+        public bool IsDeleted { get; set; }
 
         public object Clone()
         {
             return new Address
             {
-                Id = Id,
                 Street = Street,
                 StreetNumber = StreetNumber,
                 City = City,
                 Country = Country
             };
         }
+
         public override string ToString()
         {
             return $"{Street} {StreetNumber}, {City}, {Country}";

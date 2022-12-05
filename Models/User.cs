@@ -23,17 +23,16 @@ namespace SR39_2021_POP2022_2.Models
         public Address Address { get; set; }
 
         public bool IsActive { get; set; }
+        public bool IsValid { get; set; }
 
 
-        public User()
-        {
-            IsActive = true;
-        }
+        public User() { }
 
         public override string ToString()
         {
             return $"[User] {FirstName} {LastName}, {Email}";
         }
+
         public object Clone()
         {
             return new User

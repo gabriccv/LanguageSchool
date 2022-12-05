@@ -20,5 +20,6 @@ namespace SR39_2021_pop2022_2.Services
         void Update(string email, Professor professor);
         void Delete(string email);
         List<User> ListAllStudents();
+        List<User> Search(string searct);
     }
 }

@@ -59,15 +59,15 @@ namespace SR39_2021_pop2022_2.Services
             studentRepository.Add(student);
         }
 
-        public void Set(List<Student> students)
+        public void Set(List<Student> professors)
         {
-            studentRepository.Set(students);
+            studentRepository.Set(professors);
         }
 
-        public void Update(string email, Student student)
+        public void Update(string email, Student professor)
         {
-            userRepository.Update(email, student.User);
-            studentRepository.Update(email, student);
+            userRepository.Update(email, professor.User);
+            studentRepository.Update(email, professor);
         }
 
         public void Delete(string email)
@@ -76,9 +76,10 @@ namespace SR39_2021_pop2022_2.Services
             studentRepository.Delete(email);
         }
 
-        public List<User> ListAllProfessors()
+        public List<User> Search(string searct)
         {
-            throw new NotImplementedException();
+            return studentRepository.Search(searct);
         }
     }
 }
+

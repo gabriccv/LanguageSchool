@@ -1,4 +1,5 @@
 ﻿using SR39_2021_pop2022_2.Models;
+using SR39_2021_POP2022_2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,5 +17,6 @@ namespace SR39_2021_pop2022_2.Repositories
         void Set(List<Professor> professors);
         void Update(string email, Professor professor);
         void Delete(string email);
+        List<User> Search(string sting);
     }
 }

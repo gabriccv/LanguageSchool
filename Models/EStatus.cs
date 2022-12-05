@@ -6,8 +6,8 @@ using System.Threading.Tasks;
 
 namespace SR39_2021_pop2022_2.Models
 {
-    public enum EGender
+    public enum EStatus
     {
-        MALE, FEMALE, OTHER
+        SOLOBODAN, REZERVISAN
     }
 }

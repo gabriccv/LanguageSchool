@@ -15,6 +15,7 @@ namespace SR39_2021_pop2022_2.Models
 
         public User User { get => user; set => user = value; }
         public string UserId { get; set; }
+
         public object Clone()
         {
             return new Professor
@@ -27,6 +28,5 @@ namespace SR39_2021_pop2022_2.Models
         {
             return $"[Professor] {User.FirstName} {User.LastName}, {User.Email}";
         }
-
     }
 }

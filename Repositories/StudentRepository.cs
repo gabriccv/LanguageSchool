@@ -7,6 +7,7 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using SR39_2021_POP2022_2.Models;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
@@ -20,15 +21,15 @@ namespace SR39_2021_pop2022_2.Repositories
             Save();
         }
 
-        public void Add(List<Student> newStudents)
+        public void Add(List<Student> newStudent)
         {
-            students.AddRange(newStudents);
+            students.AddRange(newStudent);
             Save();
         }
 
-        public void Set(List<Student> newStudents)
+        public void Set(List<Student> newStudent)
         {
-            students = newStudents;
+            students = newStudent;
         }
 
         public void Delete(string email)
@@ -37,11 +38,23 @@ namespace SR39_2021_pop2022_2.Repositories
 
             if (student != null)
             {
-                student.User.IsActive = false;
+                //professor.User.IsActive = false;
+                students.Remove(student);
             }
 
             Save();
         }
+        //public void Delete(string email)
+        //{
+        //    Professor professor = GetById(email);
+
+        //    if (professor != null)
+        //    {
+        //        professor.User.IsActive = false;
+        //    }
+
+        //    Save();
+        //}
 
         public List<Student> GetAll()
         {
@@ -53,7 +66,7 @@ namespace SR39_2021_pop2022_2.Repositories
             return students.Find(u => u.User.Email == email);
         }
 
-        public void Update(string email, Student updatedStudent)
+        public void Update(string email, Student updatedProfessor)
         {
             Save();
         }
@@ -61,10 +74,18 @@ namespace SR39_2021_pop2022_2.Repositories
         public void Save()
         {
             IFormatter formatter = new BinaryFormatter();
-            using (Stream stream = new FileStream(Config.studentsFilePath, FileMode.Create, FileAccess.Write))
+            using (Stream stream = new FileStream(Config.professorsFilePath, FileMode.Create, FileAccess.Write))
             {
                 formatter.Serialize(stream, students);
             }
         }
+
+        public List<User> Search(string sting)
+        {
+            string lowerTerm = sting.ToLower();
+            return Data.Instance.UserService.GetAll().Where(p => (p.FirstName.ToLower().Contains(lowerTerm)
+            || p.LastName.ToLower().Contains(lowerTerm)) && !p.IsActive).ToList();
+        }
     }
 }
+

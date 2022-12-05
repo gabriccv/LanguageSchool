@@ -47,11 +47,20 @@ namespace SR39_2021_pop2022_2.Services
             return professorRepository.GetAll().Where(p => p.User.IsActive).OrderBy(p => p.User.Email).ToList();
         }
 
-        //public void Add(Professor professor)
-        //{
-        //    userRepository.Add(professor.User);
-        //    professorRepository.Add(professor);
-        //}
+        public void Add(User user)
+        {
+            userRepository.Add(user);
+
+            var professor = new Professor
+            {
+                User = user,
+                UserId = user.Email
+
+            };
+
+            professorRepository.Add(professor);
+        }
+
         public void Set(List<Professor> professors)
         {
             professorRepository.Set(professors);
@@ -74,18 +83,10 @@ namespace SR39_2021_pop2022_2.Services
             throw new NotImplementedException();
         }
 
-        public void Add(User user)
+        public List<User> Search(string searct)
         {
-            userRepository.Add(user);
-
-            var professor = new Professor
-            {
-                User = user,
-                UserId = user.Email
-
-            };
-
-            professorRepository.Add(professor);
+            return professorRepository.Search(searct);
         }
     }
 }
+

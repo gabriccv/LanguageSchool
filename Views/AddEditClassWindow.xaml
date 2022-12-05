@@ -1,11 +1,11 @@
-﻿<Window x:Class="SR39_2021_pop2022_2.Views.AddEditStudentsWindow"
+﻿<Window x:Class="SR39_2021_pop2022_2.Views.AddEditClassWindow"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR39_2021_pop2022_2.Views"
         mc:Ignorable="d"
-        Title="AddEditStudentsWindow" Height="450" Width="800">
+        Title="AddEditClassWindow" Height="450" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="100"></ColumnDefinition>
@@ -20,23 +20,22 @@
             <RowDefinition Height="*"></RowDefinition>
         </Grid.RowDefinitions>
 
-        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Email:</Label>
-        <TextBox Name="txtEmail" Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" Text="{Binding Path=Email}"></TextBox>
+        <Label Grid.Row="0" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Naziv:</Label>
+        <TextBox Name="txtName" Grid.Row="0" Grid.Column="1" Margin="5,5,5,5" Text="{Binding Path=Name}"></TextBox>
 
-        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Password:</Label>
-        <TextBox Name="txtPassword" Grid.Row="1" Grid.Column="1" Margin="5,5,5,5" Text="{Binding Path=Password}"></TextBox>
+        <Label Grid.Row="1" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Datum pocetka:</Label>
+        <TextBox Name="txtDateOfClass" Grid.Row="1" Grid.Column="1" Margin="5,5,5,5" Text="{Binding Path=DateOfClass}"></TextBox>
 
-        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">First name:</Label>
-        <TextBox Name="txtFristName" Grid.Row="2" Grid.Column="1" Margin="5,5,5,5" Text="{Binding Path=FirstName}"></TextBox>
+        <Label Grid.Row="2" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Pocetak:</Label>
+        <TextBox Name="txtStartOfClass" Grid.Row="2" Grid.Column="1" Margin="5,5,5,5" Text="{Binding Path=StartOfClass}"></TextBox>
 
-        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Last name:</Label>
-        <TextBox Name="txtLastName" Grid.Row="3" Grid.Column="1" Margin="5,5,5,5" Text="{Binding Path=LastName}"></TextBox>
+        <Label Grid.Row="3" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Trajanje:</Label>
+        <TextBox Name="txtClassTime" Grid.Row="3" Grid.Column="1" Margin="5,5,5,5" Text="{Binding Path=ClassTime}"></TextBox>
 
-        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Gender:</Label>
-        <ComboBox Name="cbUserType" Grid.Row="4" Grid.Column="1" Margin="5,5,5,5" Text="{Binding Path=Gender}">
-            <ComboBoxItem>MALE</ComboBoxItem>
-            <ComboBoxItem>FEMALE</ComboBoxItem>
-            <ComboBoxItem>OTHER</ComboBoxItem>
+        <Label Grid.Row="4" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Status:</Label>
+        <ComboBox Name="cbStatus" Grid.Row="4" Grid.Column="1" Margin="5,5,200,5" Text="{Binding Path=Status}">
+            <ComboBoxItem>SLOBODAN</ComboBoxItem>
+            <ComboBoxItem>REZERVISAN</ComboBoxItem>
         </ComboBox>
 
         <Grid Grid.Row="5" Grid.Column="1" VerticalAlignment="Bottom" HorizontalAlignment="Right">
@@ -47,6 +46,5 @@
             <Button x:Name="btnCancel" Click="btnCancel_Click" Grid.Column="0" Width="50" Height="30" HorizontalAlignment="Right" Margin="5,5,5,5">Cancel</Button>
             <Button x:Name="btnSave" Click="btnSave_Click" Grid.Column="1" Width="50" Height="30"  Margin="5,5,5,5">Save</Button>
         </Grid>
-
     </Grid>
 </Window>

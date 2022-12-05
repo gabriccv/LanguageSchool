@@ -11,82 +11,84 @@ using SR39_2021_pop2022_2.CustomException;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
-    
-    
-        class UserRepository : IUserRepository, IFilePersistence
+
+
+    class UserRepository : IUserRepository, IFilePersistence
+    {
+        private static List<User> users;
+
+        public UserRepository()
         {
-            private static List<User> users;
+            users = new List<User>();
+        }
 
-            public UserRepository()
+        public void Add(User user)
+        {
+            users.Add(user);
+            Save();
+        }
+
+        public void Add(List<User> newUsers)
+        {
+            users.AddRange(newUsers);
+            Save();
+        }
+
+        public void Set(List<User> newUsers)
+        {
+            users = newUsers;
+        }
+
+        public void Delete(string email)
+        {
+            User user = GetById(email);
+
+            if (user != null)
             {
-                users = new List<User>();
+                user.IsActive = false;
+
+            }
+            else
+            {
+                throw new UserNotFoundException();
             }
 
-            public void Add(User user)
+            Save();
+        }
+
+        public List<User> GetAll()
+        {
+            return users;
+        }
+
+        public User GetById(string email)
+        {
+            return users.Find(u => u.Email == email);
+        }
+
+        public void Update(string email, User updatedUser)
+        {
+            User user = GetById(email);
+
+            if (user != null)
             {
-                users.Add(user);
-                Save();
+                user.Address = updatedUser.Address;
+                user.FirstName = updatedUser.FirstName;
+                user.LastName = updatedUser.LastName;
+                user.UserType = updatedUser.UserType;
             }
+            Save();
+        }
 
-            public void Add(List<User> newUsers)
+        public void Save()
+        {
+            IFormatter formatter = new BinaryFormatter();
+            using (Stream stream = new FileStream(Config.usersFilePath, FileMode.Create, FileAccess.Write))
             {
-                users.AddRange(newUsers);
-                Save();
-            }
-
-            public void Set(List<User> newUsers)
-            {
-                users = newUsers;
-            }
-
-            public void Delete(string email)
-            {
-                User user = GetById(email);
-
-                if (user != null)
-                {
-                    user.IsActive = false;
-                }
-                else
-                {
-                    throw new UserNotFoundException();
-                }
-
-                Save();
-            }
-
-            public List<User> GetAll()
-            {
-                return users;
-            }
-
-            public User GetById(string email)
-            {
-                return users.Find(u => u.Email == email);
-            }
-
-            public void Update(string email, User updatedUser)
-            {
-                User user = GetById(email);
-
-                if (user != null)
-                {
-                    user.Address = updatedUser.Address;
-                    user.FirstName = updatedUser.FirstName;
-                    user.LastName = updatedUser.LastName;
-                    user.UserType = updatedUser.UserType;
-                }
-                Save();
-            }
-
-            public void Save()
-            {
-                IFormatter formatter = new BinaryFormatter();
-                using (Stream stream = new FileStream(Config.usersFilePath, FileMode.Create, FileAccess.Write))
-                {
-                    formatter.Serialize(stream, users);
-                }
+                formatter.Serialize(stream, users);
             }
         }
-    
+    }
+
 }
+

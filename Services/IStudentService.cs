@@ -16,10 +16,9 @@ namespace SR39_2021_pop2022_2.Services
         List<Student> GetActiveStudentsByEmail(string email);
         List<Student> GetActiveStudentsOrderedByEmail();
         void Add(User student);
-        void Set(List<Student> students
-            );
+        void Set(List<Student> students);
         void Update(string email, Student student);
         void Delete(string email);
-        List<User> ListAllProfessors();
+        List<User> Search(string searct);
     }
 }
