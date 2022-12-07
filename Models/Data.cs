@@ -11,34 +11,47 @@ using SR39_2021_POP2022_2.Models;
 
 namespace SR39_2021_pop2022_2.Models
 {
-    sealed class Data
+    [Serializable]
+    public class Data
     {
-        private static readonly Data instance = new Data();
-        public IUserService UserService { get; set; }
-        public IProfessorService ProfessorService { get; set; }
-        public IStudentService StudentService { get; set; }
-        public IAddressService AddressService { get; set; }
-        public ISchoolService SchoolService { get; set; }
-        public IClassService ClassService { get; set; }
+        [NonSerialized]
+        private static Data instance;
+
+        public List<User> Users { get; set; }
+        public List<Professor> Professors { get; set; }
+        public List<Student> Students { get; set; }
+        public List<Address> Addresses { get; set; }
+        public List<Class> Classes { get; set; }
+
+
+
 
         static Data() { }
 
         private Data()
         {
-            UserService = new UserService();
-            ProfessorService = new ProfessorService();
-            StudentService = new StudentService();
-            AddressService = new AddressService();
-            SchoolService = new SchoolService();
-            ClassService = new ClassesService();
+            Users = new List<User>();
+            Professors = new List<Professor>();
+            Students = new List<Student>();
+            Addresses = new List<Address>();
+            Classes = new List<Class>();
+
+
         }
 
         public static Data Instance
         {
             get
             {
+                if (instance == null)
+                {
+                    instance = new Data();
+                }
+
                 return instance;
             }
+
+            private set => instance = value;
         }
 
 
@@ -51,6 +64,13 @@ namespace SR39_2021_pop2022_2.Models
                 Street = "ulica1",
                 StreetNumber = "22",
                 //Id = 1
+            };
+            Class @class = new Class
+            {
+                Id = 1,
+                Name = "English",
+
+
             };
 
             User user1 = new User()
@@ -79,136 +99,53 @@ namespace SR39_2021_pop2022_2.Models
                 Address = address
             };
 
-            UserService.Add(user1);
-            ProfessorService.Add(user2);
+            User user3 = new User
+            {
+                Email = "zika@gmail.com",
+                FirstName = "Zika",
+                LastName = "Zikic",
+                JMBG = "121346",
+                Password = "zika",
+                Gender = EGender.FEMALE,
+                UserType = EUserType.STUDENT,
+                IsActive = true,
+                Address = address
+            };
+
+            Users.Add(user1);
+
+            var professor = new Professor
+            {
+                User = user2
+            };
+
+            Professors.Add(professor);
+            Classes.Add(@class);
         }
 
-        public void LoadData()
+        public void Save()
         {
-            var users = LoadUsers();
-            var professors = LoadProfessors();
-            var students = LoadStudents();
-            var addresses = LoadAddresses();
-            var schools = LoadSchools();
-            var classes = LoadClasses();
-
-            foreach (var professor in professors)
+            IFormatter formatter = new BinaryFormatter();
+            using (Stream stream = new FileStream(Config.dataFilePath, FileMode.Create, FileAccess.Write))
             {
-                var user = users.Find(u => u.Email == professor.UserId);
-                professor.User = user;
+                formatter.Serialize(stream, this);
             }
 
-            foreach (var student in students)
-            {
-                var user = users.Find(u => u.Email == student.UserId);
-                student.User = user;
-            }
-            UserService.Set(users);
-            ProfessorService.Set(professors);
-            StudentService.Set(students);
-            AddressService.Set(addresses);
-            SchoolService.Set(schools);
-            ClassService.Set(classes);
         }
 
-        private List<User> LoadUsers()
-        {
-            try
-            {
-                IFormatter formatter = new BinaryFormatter();
-
-                using (Stream stream = new FileStream(Config.usersFilePath, FileMode.Open, FileAccess.Read))
-                {
-                    return (List<User>)formatter.Deserialize(stream);
-                }
-            }
-            catch (Exception e)
-            {
-                return new List<User>();
-            }
-        }
-
-        private List<Professor> LoadProfessors()
+        public static void Load()
         {
             try
             {
                 IFormatter formatter = new BinaryFormatter();
-                using (Stream stream = new FileStream(Config.professorsFilePath, FileMode.Open, FileAccess.Read))
+                using (Stream stream = new FileStream(Config.dataFilePath, FileMode.Open, FileAccess.Read))
                 {
-                    return (List<Professor>)formatter.Deserialize(stream);
+                    Instance = (Data)formatter.Deserialize(stream);
                 }
             }
             catch (Exception e)
             {
-                return new List<Professor>();
-            }
-
-        }
-
-        private List<Student> LoadStudents()
-        {
-            try
-            {
-                IFormatter formatter = new BinaryFormatter();
-                using (Stream stream = new FileStream(Config.studentsFilePath, FileMode.Open, FileAccess.Read))
-                {
-                    return (List<Student>)formatter.Deserialize(stream);
-                }
-            }
-            catch (Exception e)
-            {
-                return new List<Student>();
-            }
-
-        }
-
-        private List<Address> LoadAddresses()
-        {
-            try
-            {
-                IFormatter formatter = new BinaryFormatter();
-                using (Stream stream = new FileStream(Config.addressesFilePath, FileMode.Open, FileAccess.Read))
-                {
-                    return (List<Address>)formatter.Deserialize(stream);
-                }
-            }
-            catch (Exception e)
-            {
-                return new List<Address>();
-            }
-
-        }
-
-        private List<School> LoadSchools()
-        {
-            try
-            {
-                IFormatter formatter = new BinaryFormatter();
-                using (Stream stream = new FileStream(Config.schoolsFilePath, FileMode.Open, FileAccess.Read))
-                {
-                    return (List<School>)formatter.Deserialize(stream);
-                }
-            }
-            catch (Exception e)
-            {
-                return new List<School>();
-            }
-
-        }
-
-        private List<Class> LoadClasses()
-        {
-            try
-            {
-                IFormatter formatter = new BinaryFormatter();
-                using (Stream stream = new FileStream(Config.classesFilePath, FileMode.Open, FileAccess.Read))
-                {
-                    return (List<Class>)formatter.Deserialize(stream);
-                }
-            }
-            catch (Exception e)
-            {
-                return new List<Class>();
+                Instance = new Data();
             }
 
         }

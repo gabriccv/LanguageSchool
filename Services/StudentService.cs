@@ -36,38 +36,30 @@ namespace SR39_2021_pop2022_2.Services
             return studentRepository.GetAll().Where(p => p.User.IsActive).ToList();
         }
 
-        public List<Student> GetActiveStudentsByEmail(string email)
-        {
-            return studentRepository.GetAll().Where(p => p.User.IsActive && p.User.Email.Contains(email)).ToList();
-        }
+        //public List<Student> GetActiveStudentsByEmail(string email)
+        //{
+        //    return studentRepository.GetAll().Where(p => p.User.IsActive && p.User.Email.Contains(email)).ToList();
+        //}
         public List<Student> GetActiveStudentsOrderedByEmail()
         {
             return studentRepository.GetAll().Where(p => p.User.IsActive).OrderBy(p => p.User.Email).ToList();
         }
 
-        public void Add(User user)
+        public void Add(Student student)
         {
-            userRepository.Add(user);
-
-            var student = new Student
-            {
-                User = user,
-                UserId = user.Email
-
-            };
-
+            userRepository.Add(student.User);
             studentRepository.Add(student);
         }
 
-        public void Set(List<Student> professors)
+        public void Set(List<Student> students)
         {
-            studentRepository.Set(professors);
+            studentRepository.Set(students);
         }
 
-        public void Update(string email, Student professor)
+        public void Update(string email, Student student)
         {
-            userRepository.Update(email, professor.User);
-            studentRepository.Update(email, professor);
+            userRepository.Update(email, student.User);
+            studentRepository.Update(email, student);
         }
 
         public void Delete(string email)
@@ -76,9 +68,9 @@ namespace SR39_2021_pop2022_2.Services
             studentRepository.Delete(email);
         }
 
-        public List<User> Search(string searct)
+        public List<User> ListAllStudents()
         {
-            return studentRepository.Search(searct);
+            throw new NotImplementedException();
         }
     }
 }

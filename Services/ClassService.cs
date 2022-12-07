@@ -8,22 +8,19 @@ using System.Threading.Tasks;
 
 namespace SR39_2021_pop2022_2.Services
 {
-    class ClassesService : IClassService
+    class ClassService : IClassService
     {
-        private ClassRepository classRepository;
+        private IClassRepository classRepository;
 
-        public ClassesService()
+        public ClassService()
         {
             classRepository = new ClassRepository();
-        }
-        public void Add(Class classs)
-        {
-            classRepository.Add(classs);
+
         }
 
-        public void Delete(string street)
+        public Class GetById(int id)
         {
-            classRepository.Delete(street);
+            return classRepository.GetById(id);
         }
 
         public List<Class> GetAll()
@@ -31,9 +28,21 @@ namespace SR39_2021_pop2022_2.Services
             return classRepository.GetAll();
         }
 
-        public Class GetById(string street)
+        public List<Class> GetAvailableClasses()
         {
-            return classRepository.GetById(street);
+            return classRepository.GetAll().Where(p => !p.IsDeleted).ToList();
+        }
+
+
+
+        public void Add(Class calss)
+        {
+            if (calss.Id == 0)
+            {
+                calss.Id = classRepository.NextId(classRepository.GetAll());
+            }
+            classRepository.Add(calss);
+
         }
 
         public void Set(List<Class> classes)
@@ -41,9 +50,31 @@ namespace SR39_2021_pop2022_2.Services
             classRepository.Set(classes);
         }
 
-        public void Update(string street, Class classs)
+        public void Update(int id, Class @class)
         {
-            classRepository.Update(street, classs);
+            classRepository.Update(id, @class);
+
+        }
+
+        public void Delete(int id)
+        {
+
+            classRepository.Delete(id);
+        }
+
+        public List<Class> ListAllClasses()
+        {
+            throw new NotImplementedException();
+        }
+
+        public List<Class> GetAvailableClassesByName(string name)
+        {
+            return classRepository.GetAll().Where(p => !p.IsDeleted && p.Name.Contains(name)).ToList();
+        }
+
+        public List<Class> GetAvailableClassesOrderedByName()
+        {
+            return classRepository.GetAll().Where(p => !p.IsDeleted).OrderBy(p => p.Name).ToList();
         }
     }
 }

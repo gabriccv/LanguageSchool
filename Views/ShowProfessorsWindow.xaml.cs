@@ -17,9 +17,7 @@ using System.Windows.Shapes;
 
 namespace SR39_2021_pop2022_2.Views
 {
-    /// <summary>
-    /// Interaction logic for AllProfessorsWindow.xaml
-    /// </summary>
+
     public partial class ShowProfessorsWindow : Window
     {
         private ProfessorService professorService = new ProfessorService();
@@ -32,12 +30,13 @@ namespace SR39_2021_pop2022_2.Views
 
         private void miAddProfessor_Click(object sender, RoutedEventArgs e)
         {
-            var professorWindow = new AddEditProfessorsWindow();
-            var successful = professorWindow.ShowDialog();
+            var addEditProfessorWindow = new AddEditProfessorsWindow();
 
-            if ((bool)successful)
+            var successeful = addEditProfessorWindow.ShowDialog();
+
+            if ((bool)successeful)
             {
-                dgProfessors.ItemsSource = Data.Instance.ProfessorService.GetAll().Select(p => p.User).ToList();
+                RefreshDataGrid();
             }
         }
 
@@ -47,7 +46,7 @@ namespace SR39_2021_pop2022_2.Views
 
             if (selectedIndex >= 0)
             {
-                var professors = professorService.GetAll().Select(u => u.User).ToList();
+                var professors = professorService.GetAll();
 
                 var addEditProfessorWindow = new AddEditProfessorsWindow(professors[selectedIndex]);
 
@@ -62,38 +61,29 @@ namespace SR39_2021_pop2022_2.Views
 
         private void miDeleteProfessor_Click(object sender, RoutedEventArgs e)
         {
-            var selctedItem = ((User)dgProfessors.SelectedItem).Email;
-            if (selctedItem != null)
+            var selectedUser = dgProfessors.SelectedItem as User;
+
+            if (selectedUser != null)
             {
-                MessageBoxResult ms = MessageBox.Show("Da li ste sigurni da zelite daobrisete profeesor", "", MessageBoxButton.YesNo);
-                {
-                    if (ms == MessageBoxResult.Yes)
-                    {
-                        Data.Instance.ProfessorService.Delete(selctedItem);
-                        List<User> users = Data.Instance.ProfessorService.GetAll().Select(p => p.User).ToList();
-                        dgProfessors.ItemsSource = users;
-                    }
-                }
+                professorService.Delete(selectedUser.Email);
+                RefreshDataGrid();
             }
 
         }
 
         private void RefreshDataGrid()
         {
-            List<User> users = Data.Instance.ProfessorService.GetAll().Select(p => p.User).ToList();
+            List<User> users = professorService.GetAll().Select(p => p.User).ToList();
             dgProfessors.ItemsSource = users;
         }
 
-        private void txtSearch_KeyUp(object sender, KeyEventArgs e)
+        private void dgProfessors_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
+            if (e.PropertyName == "Error" || e.PropertyName == "IsValid")
+            {
+                e.Column.Visibility = Visibility.Collapsed;
+            }
 
         }
-
-        private void dgProfessors_SelectionChanged(object sender, SelectionChangedEventArgs e)
-        {
-            var value = txtSearch.Text;
-            Data.Instance.ProfessorService.Search(value);
-        }
-
     }
 }

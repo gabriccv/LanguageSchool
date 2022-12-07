@@ -10,62 +10,65 @@ using System.Threading.Tasks;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
-    class ClassRepository : IClassRepository, IFilePersistence
+    class ClassRepository : IClassRepository
     {
-        private static List<Class> listClasses = new List<Class>();
-        public void Add(Class classs)
+        //private static List<Class> classes = new List<Class>();
+
+        public void Add(Class @class)
         {
-            listClasses.Add(classs);
-            Save();
+            Data.Instance.Classes.Add(@class);
+            Data.Instance.Save();
         }
 
-        public void Add(List<Class> classs)
+        public void Add(List<Class> newClasses)
         {
-            listClasses.AddRange(classs);
-            Save();
-        }
-        public void Set(List<Class> classs)
-        {
-            listClasses = classs;
+            Data.Instance.Classes.AddRange(newClasses);
+            Data.Instance.Save();
         }
 
-        public void Delete(string street)
+        public void Set(List<Class> newClasses)
         {
-            Class classs = GetById(street);
-            if (classs != null)
+            Data.Instance.Classes = newClasses;
+        }
+
+        public void Delete(int id)
+        {
+            Class @class = GetById(id);
+
+            if (@class != null)
             {
-                classs.IsDeleted = true;
-                //listClasses.Remove(classs);
+                @class.IsDeleted = true;
             }
-            Save();
+
+            Data.Instance.Save();
         }
 
         public List<Class> GetAll()
         {
-            return listClasses;
+            return Data.Instance.Classes;
         }
 
-        public Class GetById(string gmail)
+        public Class GetById(int id)
         {
-            return listClasses.Find(c => c.Name == gmail);
-        }
-        public void Update(string street, Class classs)
-        {
-            Save();
+            return Data.Instance.Classes.Find(u => u.Id == id);
         }
 
-        public void Save()
+        public void Update(int id, Class updatedClass)
         {
-            IFormatter formatter = new BinaryFormatter();
-            using (Stream stream = new FileStream(Config.classesFilePath, FileMode.Create, FileAccess.Write))
+            Data.Instance.Save();
+        }
+
+        public int NextId(List<Class> lista)
+        {
+            int index=0;
+            for(int i = 0; i <= lista.Count; i++)
             {
-                formatter.Serialize(stream, listClasses);
+                if (index < i)
+                {
+                    index= i;
+                }
             }
-        }
-
-        public List<Class> Search(string sting)
-        {
-            throw new NotImplementedException();
+            return ++index;
         }
 
 

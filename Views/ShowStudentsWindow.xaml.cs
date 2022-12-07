@@ -1,4 +1,5 @@
 ﻿using SR39_2021_pop2022_2.Models;
+using SR39_2021_pop2022_2.Services;
 using SR39_2021_POP2022_2.Models;
 using System;
 using System.Collections.Generic;
@@ -18,57 +19,71 @@ namespace SR39_2021_pop2022_2.Views
 {
 
 
-    /// <summary>
-    /// Interaction logic for AllStudentsWindow.xaml
-    /// </summary>
+
     public partial class ShowStudentsWindow : Window
     {
+        private StudentService studentService = new StudentService();
+
         public ShowStudentsWindow()
         {
             InitializeComponent();
-            List<User> users = Data.Instance.StudentService.GetAll().Select(p => p.User).ToList();
-            dgStudent.ItemsSource = users;
-
+            RefreshDataGrid();
         }
 
         private void miAddStudent_Click(object sender, RoutedEventArgs e)
         {
-            var studetWindow = new AddEditStudentsWindow();
-            var successful = studetWindow.ShowDialog();
+            var addEditStudentWindow = new AddEditStudentsWindow();
 
-            if ((bool)successful)
+            var successeful = addEditStudentWindow.ShowDialog();
+
+            if ((bool)successeful)
             {
-                dgStudent.ItemsSource = Data.Instance.StudentService.GetAll().Select(p => p.User).ToList();
+                RefreshDataGrid();
+            }
+        }
+
+        private void miUpdateStudent_Click(object sender, RoutedEventArgs e)
+        {
+            var selectedIndex = dgStudent.SelectedIndex;
+
+            if (selectedIndex >= 0)
+            {
+                var students = studentService.GetAll();
+
+                var addEditStudentWindow = new AddEditStudentsWindow(students[selectedIndex]);
+
+                var successeful = addEditStudentWindow.ShowDialog();
+
+                if ((bool)successeful)
+                {
+                    RefreshDataGrid();
+                }
             }
         }
 
         private void miDeleteStudent_Click(object sender, RoutedEventArgs e)
         {
-            var selctedItem = ((User)dgStudent.SelectedItem).Email;
-            if (selctedItem != null)
+            var selectedUser = dgStudent.SelectedItem as User;
+
+            if (selectedUser != null)
             {
-                MessageBoxResult ms = MessageBox.Show("Da li ste sigurni da zelite daobrisete studenta", "", MessageBoxButton.YesNo);
-                {
-                    if (ms == MessageBoxResult.Yes)
-                    {
-                        Data.Instance.StudentService.Delete(selctedItem);
-                        List<User> users = Data.Instance.StudentService.GetAll().Select(p => p.User).ToList();
-                        dgStudent.ItemsSource = users;
-                    }
-                }
+                studentService.Delete(selectedUser.Email);
+                RefreshDataGrid();
             }
-
         }
 
-        private void txtSearch_KeyUp(object sender, KeyEventArgs e)
+        private void RefreshDataGrid()
         {
-
+            List<User> users = studentService.GetAll().Select(p => p.User).ToList();
+            dgStudent.ItemsSource = users;
         }
 
-        private void dgStudent_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void dgStudents_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
         {
-            var value = txtSearch.Text;
-            Data.Instance.StudentService.Search(value);
+            if (e.PropertyName == "Error" || e.PropertyName == "IsValid")
+            {
+                e.Column.Visibility = Visibility.Collapsed;
+            }
         }
     }
 }

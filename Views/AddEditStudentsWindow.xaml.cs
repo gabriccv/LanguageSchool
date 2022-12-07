@@ -1,4 +1,5 @@
 ﻿using SR39_2021_pop2022_2.Models;
+using SR39_2021_pop2022_2.Services;
 using SR39_2021_POP2022_2.Models;
 using System;
 using System.Collections.Generic;
@@ -16,34 +17,66 @@ using System.Windows.Shapes;
 
 namespace SR39_2021_pop2022_2.Views
 {
-    /// <summary>
-    /// Interaction logic for AddStudentWindow.xaml
-    /// </summary>
+
     public partial class AddEditStudentsWindow : Window
     {
-        private User newUser;
+        private Student student;
+        private IStudentService studentService = new StudentService();
+        private bool isAddMode;
+
+        public AddEditStudentsWindow(Student student)
+        {
+            InitializeComponent();
+            this.student = student.Clone() as Student;
+
+            DataContext = this.student;
+
+            isAddMode = false;
+            txtJMBG.IsReadOnly = true;
+            txtEmail.IsReadOnly = true;
+        }
+
         public AddEditStudentsWindow()
         {
             InitializeComponent();
-            newUser = new User
+
+            var user = new User
             {
                 UserType = EUserType.STUDENT,
                 IsActive = true
-
             };
-            DataContext = newUser;
-        }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            student = new Student
+            {
+                User = user
+            };
+
+            isAddMode = true;
+            DataContext = student;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Data.Instance.StudentService.Add(newUser);
-            this.DialogResult = true;
-            this.Close();
+            if (student.User.IsValid)
+            {
+                if (isAddMode)
+                {
+                    studentService.Add(student);
+                }
+                else
+                {
+                    studentService.Update(student.User.Email, student);
+                }
+
+                DialogResult = true;
+                Close();
+            }
+        }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
         }
     }
 }

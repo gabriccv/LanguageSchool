@@ -17,50 +17,37 @@ using System.Windows.Shapes;
 
 namespace SR39_2021_pop2022_2
 {
-    /// <summary>
-    /// Interaction logic for MainWindow.xaml
-    /// </summary>
+
     public partial class MainWindow : Window
     {
         public MainWindow()
         {
             InitializeComponent();
-            Data.Instance.LoadData();
+            Data.Load();
         }
 
-        private void btnStudent_Click(object sender, RoutedEventArgs e)
-        {
-            var studentsWindow = new ShowStudentsWindow();
-            studentsWindow.Show();
-            //Close();
-        }
-
-        private void btnProfessor_Click(object sender, RoutedEventArgs e)
+        private void btnProfessors_Click(object sender, RoutedEventArgs e)
         {
             var professorsWindow = new ShowProfessorsWindow();
-            professorsWindow.Show();
-            //Close();
+            professorsWindow.ShowDialog();
+            //this.Hide();
+        }
+        private void btnStudents_Click(object sender, RoutedEventArgs e)
+        {
+            var studentsWindow = new ShowStudentsWindow();
+            studentsWindow.ShowDialog();
         }
 
-        private void btnAddress_Click(object sender, RoutedEventArgs e)
+        private void Address_Click(object sender, RoutedEventArgs e)
         {
             var addressWindow = new ShowAddressWindow();
-            addressWindow.Show();
-            //Close();
+            addressWindow.ShowDialog();
         }
 
-        private void btnSchool_Click(object sender, RoutedEventArgs e)
-        {
-            var schoolWindow = new ShowSchoolsWindow();
-            schoolWindow.Show();
-            //Close();
-        }
-
-        private void btnClass_Click(object sender, RoutedEventArgs e)
+        private void Class_Click(object sender, RoutedEventArgs e)
         {
             var classWindow = new ShowClassesWindow();
-            classWindow.Show();
-            //Close();
+            classWindow.ShowDialog();
         }
     }
 }

@@ -59,18 +59,14 @@
     <Compile Include="CustomException\UserNotFoundException.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\EStatus.cs" />
-    <Compile Include="Models\School.cs" />
     <Compile Include="Repositories\AddressRepository.cs" />
     <Compile Include="Repositories\ClassRepository.cs" />
     <Compile Include="Repositories\IAddressRepository.cs" />
     <Compile Include="Repositories\IClassRepository.cs" />
-    <Compile Include="Repositories\IFilePersistence.cs" />
     <Compile Include="Repositories\IProfessorRepository.cs" />
-    <Compile Include="Repositories\ISchoolRepository.cs" />
     <Compile Include="Repositories\IStudentRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
     <Compile Include="Repositories\ProfessorRepository.cs" />
-    <Compile Include="Repositories\SchoolRepository.cs" />
     <Compile Include="Repositories\StudentRepository.cs" />
     <Compile Include="Repositories\UserRepository.cs" />
     <Compile Include="Services\AddressService.cs" />
@@ -78,11 +74,9 @@
     <Compile Include="Services\IAddressService.cs" />
     <Compile Include="Services\IClassService.cs" />
     <Compile Include="Services\IProfessorService.cs" />
-    <Compile Include="Services\ISchoolService.cs" />
     <Compile Include="Services\IStudentService.cs" />
     <Compile Include="Services\IUserService.cs" />
     <Compile Include="Services\ProfessorService.cs" />
-    <Compile Include="Services\SchoolService.cs" />
     <Compile Include="Services\StudentService.cs" />
     <Compile Include="Services\UserService.cs" />
     <Compile Include="Views\AddEditAddressWindow.xaml.cs">
@@ -93,9 +87,6 @@
     </Compile>
     <Compile Include="Views\AddEditProfessorsWindow.xaml.cs">
       <DependentUpon>AddEditProfessorsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddEditSchoolWindow.xaml.cs">
-      <DependentUpon>AddEditSchoolWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddEditStudentsWindow.xaml.cs">
       <DependentUpon>AddEditStudentsWindow.xaml</DependentUpon>
@@ -108,9 +99,6 @@
     </Compile>
     <Compile Include="Views\ShowProfessorsWindow.xaml.cs">
       <DependentUpon>ShowProfessorsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\ShowSchoolsWindow.xaml.cs">
-      <DependentUpon>ShowSchoolsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShowStudentsWindow.xaml.cs">
       <DependentUpon>ShowStudentsWindow.xaml</DependentUpon>
@@ -139,10 +127,6 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Views\AddEditSchoolWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
     <Page Include="Views\AddEditStudentsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -156,10 +140,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShowProfessorsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\ShowSchoolsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -197,12 +177,11 @@
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
     </None>
+    <None Include="Resources\data.bin" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="Resources\" />
-  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

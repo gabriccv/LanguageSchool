@@ -27,7 +27,7 @@ namespace SR39_2021_pop2022_2.Services
         {
             return professorRepository.GetById(email);
         }
-
+        
         public List<Professor> GetAll()
         {
             return professorRepository.GetAll();
@@ -47,17 +47,9 @@ namespace SR39_2021_pop2022_2.Services
             return professorRepository.GetAll().Where(p => p.User.IsActive).OrderBy(p => p.User.Email).ToList();
         }
 
-        public void Add(User user)
+        public void Add(Professor professor)
         {
-            userRepository.Add(user);
-
-            var professor = new Professor
-            {
-                User = user,
-                UserId = user.Email
-
-            };
-
+            userRepository.Add(professor.User);
             professorRepository.Add(professor);
         }
 
@@ -81,11 +73,6 @@ namespace SR39_2021_pop2022_2.Services
         public List<User> ListAllStudents()
         {
             throw new NotImplementedException();
-        }
-
-        public List<User> Search(string searct)
-        {
-            return professorRepository.Search(searct);
         }
     }
 }

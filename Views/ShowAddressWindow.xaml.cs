@@ -1,8 +1,10 @@
 ﻿using SR39_2021_pop2022_2.Models;
+using SR39_2021_pop2022_2.Services;
 using SR39_2021_POP2022_2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -16,52 +18,71 @@ using System.Windows.Shapes;
 
 namespace SR39_2021_pop2022_2.Views
 {
-    /// <summary>
-    /// Interaction logic for AllAddressesWindow.xaml
-    /// </summary>
+
     public partial class ShowAddressWindow : Window
     {
+        private AddressService addressService = new AddressService();
+
         public ShowAddressWindow()
         {
             InitializeComponent();
-            List<Address> addresses = Data.Instance.AddressService.GetAll().ToList();
-            dgAddress.ItemsSource = addresses;
+            RefreshDataGrid();
         }
 
         private void miAddAddress_Click(object sender, RoutedEventArgs e)
         {
-            var addressWindow = new AddEditAddressWindow();
-            var succesful = addressWindow.ShowDialog();
-            if ((bool)succesful)
+            var addEditAddressWindow = new AddEditAddressWindow();
+
+            var successeful = addEditAddressWindow.ShowDialog();
+
+            if ((bool)successeful)
             {
-                dgAddress.ItemsSource = Data.Instance.AddressService.GetAll().ToList();
+                RefreshDataGrid();
             }
         }
 
-
-        private void miDeleteAddress_Click(object sender, RoutedEventArgs e)
+        private void miUpdateAddress_Click(object sender, RoutedEventArgs e)
         {
-            var selctedItem = ((Address)dgAddress.SelectedItem).Street;
-            if (selctedItem != null)
+            var selectedIndex = dgAddress.SelectedIndex;
+
+            if (selectedIndex >= 0)
             {
-                MessageBoxResult ms = MessageBox.Show("Da li ste sigurni da zelite daobrisete adresu" + selctedItem, "", MessageBoxButton.YesNo);
+                var address = addressService.GetAll();
+
+                var addEditAddressWindow = new AddEditAddressWindow(address[selectedIndex]);
+
+                var successeful = addEditAddressWindow.ShowDialog();
+
+                if ((bool)successeful)
                 {
-                    if (ms == MessageBoxResult.Yes)
-                    {
-                        Data.Instance.AddressService.Delete(selctedItem);
-                        List<Address> addresses = Data.Instance.AddressService.GetAll().ToList();
-                        dgAddress.ItemsSource = addresses;
-                    }
+                    RefreshDataGrid();
                 }
             }
         }
-        private void dgAddress_SelectionChanged(object sender, SelectionChangedEventArgs e)
+
+        private void miDeleteAddress_Click(object sender, RoutedEventArgs e)
         {
+            var selectedAddress = dgAddress.SelectedItem as Address;
+
+            if (selectedAddress != null)
+            {
+                addressService.Delete(selectedAddress.Id);
+                RefreshDataGrid();
+            }
         }
 
-        private void txtSearch_KeyUp(object sender, KeyEventArgs e)
+        private void RefreshDataGrid()
         {
+            List<Address> addresses = addressService.GetAll().Select(p => p).ToList();
+            dgAddress.ItemsSource = addresses;
+        }
 
+        private void dgAddress_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+        {
+            if (e.PropertyName == "Error" || e.PropertyName == "IsValid")
+            {
+                e.Column.Visibility = Visibility.Collapsed;
+            }
         }
     }
 

@@ -17,63 +17,68 @@ using System.Windows.Shapes;
 
 namespace SR39_2021_pop2022_2.Views
 {
-    /// <summary>
-    /// Interaction logic for AddProfessorWindow.xaml
-    /// </summary>
+
     public partial class AddEditProfessorsWindow : Window
     {
-        private User newUser;
+
         private Professor professor;
+        private IProfessorService professorService = new ProfessorService();
         private bool isAddMode;
 
-        public AddEditProfessorsWindow(User user)
+        public AddEditProfessorsWindow(Professor professor)
         {
             InitializeComponent();
-            this.newUser = user.Clone() as User;
-            DataContext = this.newUser; //postavimo vrednosti u txt polja
-            this.professor = new Professor
-            {
-                User = this.newUser,
-                UserId = this.newUser.Email
-            };
+            this.professor = professor.Clone() as Professor;
+
+            DataContext = this.professor;
 
             isAddMode = false;
+            txtJMBG.IsReadOnly = true;
             txtEmail.IsReadOnly = true;
         }
+
         public AddEditProfessorsWindow()
         {
             InitializeComponent();
-            newUser = new User
+
+            var user = new User
             {
                 UserType = EUserType.PROFESSOR,
                 IsActive = true
-
             };
-            //professor = new Professor
-            //{
-            //    User = newUser,
-            //    UserId = newUser.Email
-            //};
+
+            professor = new Professor
+            {
+                User = user
+            };
+
             isAddMode = true;
-            DataContext = newUser;
+            DataContext = professor;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            if (isAddMode)
+            if (professor.User.IsValid)
             {
-                Data.Instance.ProfessorService.Add(newUser);
+                if (isAddMode)
+                {
+                    professorService.Add(professor);
+                }
+                else
+                {
+                    professorService.Update(professor.User.Email, professor);
+                }
+
+                DialogResult = true;
+                Close();
             }
-            else
-            {
-                Data.Instance.ProfessorService.Update(this.newUser.Email, this.professor);
-            }
-            this.DialogResult = true;
-            this.Close();
+
         }
+
         private void btnCancel_Click(object sender, RoutedEventArgs e)
         {
-            this.Close();
+            DialogResult = false;
+            Close();
         }
     }
 }

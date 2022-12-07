@@ -10,10 +10,13 @@ namespace SR39_2021_pop2022_2.Services
     interface IAddressService
     {
         List<Address> GetAll();
-        Address GetById(string street);
+        Address GetById(int id);
+        List<Address> GetActiveAddresses();
+        List<Address> GetActiveAddressesByCountry(string country);
+        List<Address> GetActiveAddressesOrderedByCountry();
         void Add(Address address);
         void Set(List<Address> addresses);
-        void Update(string street, Address address);
-        void Delete(string street);
+        void Update(int id, Address address);
+        void Delete(int id);
     }
 }

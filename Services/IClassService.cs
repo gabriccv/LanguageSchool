@@ -10,10 +10,13 @@ namespace SR39_2021_pop2022_2.Services
     interface IClassService
     {
         List<Class> GetAll();
-        Class GetById(string street);
-        void Add(Class classs);
+        Class GetById(int id);
+        List<Class> GetAvailableClasses();
+        List<Class> GetAvailableClassesByName(string name);
+        List<Class> GetAvailableClassesOrderedByName();
+        void Add(Class @class);
         void Set(List<Class> classes);
-        void Update(string street, Class classs);
-        void Delete(string street);
+        void Update(int id, Class classes);
+        void Delete(int id);
     }
 }

@@ -10,12 +10,13 @@ namespace SR39_2021_pop2022_2.Repositories
     interface IClassRepository
     {
         List<Class> GetAll();
-        Class GetById(string gmail);
-        void Add(Class classs);
-        void Add(List<Class> classs);
-        void Set(List<Class> classs);
-        void Update(string street, Class classs);
-        void Delete(string street);
-        List<Class> Search(string sting);
+        Class GetById(int id);
+        int NextId(List<Class> lista);
+        void Add(Class @class);
+        void Add(List<Class> classes);
+        void Set(List<Class> classes);
+        void Update(int id, Class @class);
+        void Delete(int id);
+
     }
 }

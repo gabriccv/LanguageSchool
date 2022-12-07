@@ -11,25 +11,23 @@ using SR39_2021_POP2022_2.Models;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
-    class StudentRepository : IStudentRepository, IFilePersistence
+    class StudentRepository : IStudentRepository
     {
-        private static List<Student> students = new List<Student>();
-
         public void Add(Student student)
         {
-            students.Add(student);
-            Save();
+            Data.Instance.Students.Add(student);
+            Data.Instance.Save();
         }
 
-        public void Add(List<Student> newStudent)
+        public void Add(List<Student> newStudents)
         {
-            students.AddRange(newStudent);
-            Save();
+            Data.Instance.Students.AddRange(newStudents);
+            Data.Instance.Save();
         }
 
-        public void Set(List<Student> newStudent)
+        public void Set(List<Student> newStudents)
         {
-            students = newStudent;
+            Data.Instance.Students = newStudents;
         }
 
         public void Delete(string email)
@@ -38,53 +36,24 @@ namespace SR39_2021_pop2022_2.Repositories
 
             if (student != null)
             {
-                //professor.User.IsActive = false;
-                students.Remove(student);
+                student.User.IsActive = false;
             }
 
-            Save();
+            Data.Instance.Save();
         }
-        //public void Delete(string email)
-        //{
-        //    Professor professor = GetById(email);
-
-        //    if (professor != null)
-        //    {
-        //        professor.User.IsActive = false;
-        //    }
-
-        //    Save();
-        //}
-
         public List<Student> GetAll()
         {
-            return students;
+            return Data.Instance.Students;
         }
 
         public Student GetById(string email)
         {
-            return students.Find(u => u.User.Email == email);
+            return Data.Instance.Students.Find(u => u.User.Email == email);
         }
 
-        public void Update(string email, Student updatedProfessor)
+        public void Update(string email, Student updatedStudent)
         {
-            Save();
-        }
-
-        public void Save()
-        {
-            IFormatter formatter = new BinaryFormatter();
-            using (Stream stream = new FileStream(Config.professorsFilePath, FileMode.Create, FileAccess.Write))
-            {
-                formatter.Serialize(stream, students);
-            }
-        }
-
-        public List<User> Search(string sting)
-        {
-            string lowerTerm = sting.ToLower();
-            return Data.Instance.UserService.GetAll().Where(p => (p.FirstName.ToLower().Contains(lowerTerm)
-            || p.LastName.ToLower().Contains(lowerTerm)) && !p.IsActive).ToList();
+            Data.Instance.Save();
         }
     }
 }

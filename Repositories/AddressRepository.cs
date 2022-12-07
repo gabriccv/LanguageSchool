@@ -7,65 +7,58 @@ using System.Runtime.Serialization.Formatters.Binary;
 using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
+using SR39_2021_pop2022_2.Models;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
-    class AddressRepository : IAddressReository, IFilePersistence
+   class AddressRepository : IAddressRepository
     {
-        private static List<Address> listaddresses = new List<Address>();
+        //private static List<Address> addresses = new List<Address>();
 
         public void Add(Address address)
         {
-            listaddresses.Add(address);
-            Save();
-        }
-        public void Add(List<Address> addresses)
-        {
-            listaddresses.AddRange(addresses);
-            Save();
-        }
-        public void Set(List<Address> addresses)
-        {
-            listaddresses = addresses;
+            Data.Instance.Addresses.Add(address);
+            Data.Instance.Save();
         }
 
-        public void Delete(string street)
+        public void Add(List<Address> newAddresses)
         {
-            Address address = GetById(street);
+            Data.Instance.Addresses.AddRange(newAddresses);
+            Data.Instance.Save();
+        }
+
+        public void Set(List<Address> newAddresses)
+        {
+            Data.Instance.Addresses = newAddresses;
+        }
+
+        public void Delete(int id)
+        {
+            Address address = GetById(id);
 
             if (address != null)
             {
                 address.IsDeleted = true;
-                //listaddresses.Remove(address);
+            
             }
-            Save();
+
+            Data.Instance.Save();
+
         }
 
         public List<Address> GetAll()
         {
-            return listaddresses;
+            return Data.Instance.Addresses;
         }
 
-        public Address GetById(string street)
+        public Address GetById(int id)
         {
-            return listaddresses.Find(a => a.Street == street);
+            return Data.Instance.Addresses.Find(u => u.Id == id);
         }
 
-        public void Update(string street, Address address)
+        public void Update(int id, Address updatedAddress)
         {
-            Save();
-        }
-        public void Save()
-        {
-            IFormatter formatter = new BinaryFormatter();
-            using (Stream stream = new FileStream(Config.addressesFilePath, FileMode.Create, FileAccess.Write))
-            {
-                formatter.Serialize(stream, listaddresses);
-            }
-        }
-        public List<User> Search(string sting)
-        {
-            throw new NotImplementedException();
+            Data.Instance.Save();
         }
 
     }

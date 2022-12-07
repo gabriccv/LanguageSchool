@@ -15,11 +15,11 @@ namespace SR39_2021_pop2022_2.Services
         List<Professor> GetActiveProfessors();
         List<Professor> GetActiveProfessorsByEmail(string email);
         List<Professor> GetActiveProfessorsOrderedByEmail();
-        void Add(User professor);
+        void Add(Professor professor);
         void Set(List<Professor> professors);
         void Update(string email, Professor professor);
         void Delete(string email);
         List<User> ListAllStudents();
-        List<User> Search(string searct);
+
     }
 }

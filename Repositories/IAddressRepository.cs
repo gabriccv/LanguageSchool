@@ -7,15 +7,15 @@ using System.Threading.Tasks;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
-    interface IAddressReository
+    interface IAddressRepository
     {
         List<Address> GetAll();
-        Address GetById(string street);
+        Address GetById(int id);
         void Add(Address address);
         void Add(List<Address> addresses);
         void Set(List<Address> addresses);
-        void Update(string street, Address address);
-        void Delete(string street);
-        List<User> Search(string sting);
+        void Update(int id, Address address);
+        void Delete(int id);
+
     }
 }

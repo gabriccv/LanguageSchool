@@ -6,22 +6,27 @@
         xmlns:local="clr-namespace:SR39_2021_pop2022_2.Views"
         mc:Ignorable="d"
         Title="ShowProfessorsWindow" Height="450" Width="800">
-    <Grid RenderTransformOrigin="0.505,0.109" Margin="0,0,0,-6">
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition></ColumnDefinition>
-        </Grid.ColumnDefinitions>
+    <Grid>
         <Grid.RowDefinitions>
-            <RowDefinition Height="14*"></RowDefinition>
-            <RowDefinition Height="40*"></RowDefinition>
-            <RowDefinition Height="211*"></RowDefinition>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Menu Grid.Row="0" HorizontalAlignment="Stretch" Margin="0,0,0,0" VerticalAlignment="Top" Grid.RowSpan="1" >
-            <MenuItem Name="miAddProfessor" Header="Add Professor" Click="miAddProfessor_Click"/>
-            <MenuItem Name="miUpdateProfessor" Header="Edit Professor" Click="miUpdateProfessor_Click"/>
-            <MenuItem Name="miDeleteProfessor" Header="Delete Professor" Click="miDeleteProfessor_Click"/>
+
+        <Menu Grid.Row="0" 
+              VerticalAlignment="Top" 
+              Height="30">
+            <MenuItem Name="miAddProfessor" Height="30" Header="Add professor" Click="miAddProfessor_Click"></MenuItem>
+            <MenuItem Name="miUpdateProfessor" Height="30" Header="Update professor" Click="miUpdateProfessor_Click"></MenuItem>
+            <MenuItem Name="miDeleteProfessor" Height="30" Header="Delete professor" Click="miDeleteProfessor_Click"></MenuItem>
         </Menu>
-        <TextBox Name="txtSearch"  Margin="5,5,5,5" KeyUp="txtSearch_KeyUp" Height="30" Width="150" HorizontalAlignment="Left" Grid.Row="1"/>
-        <DataGrid IsReadOnly="True" CanUserAddRows="False" Name="dgProfessors" Margin="0,0,0,-1" Grid.Row="2" SelectionChanged="dgProfessors_SelectionChanged"/>
+
+        <DataGrid CanUserAddRows="False" 
+                  IsReadOnly="True" 
+                  Grid.Row="1" 
+                  Name="dgProfessors" 
+                  Width="800" 
+                  Margin="0,0,-8,0"
+                  AutoGeneratingColumn="dgProfessors_AutoGeneratingColumn"/>
 
     </Grid>
 </Window>

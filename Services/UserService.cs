@@ -14,7 +14,7 @@ namespace SR39_2021_pop2022_2.Services
         private IUserRepository repostory;
 
         public UserService()
-        {
+        {   
             repostory = new UserRepository();
         }
 

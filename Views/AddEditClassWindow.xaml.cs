@@ -1,4 +1,5 @@
 ﻿using SR39_2021_pop2022_2.Models;
+using SR39_2021_pop2022_2.Services;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,29 +16,62 @@ using System.Windows.Shapes;
 
 namespace SR39_2021_pop2022_2.Views
 {
-    /// <summary>
-    /// Interaction logic for AddClassWindow.xaml
-    /// </summary>
+
     public partial class AddEditClassWindow : Window
     {
-        private Class newClass;
+        private Class @class;
+        private IClassService classService = new ClassService();
+        private bool isAddMode;
+
+        public AddEditClassWindow(Class @class)
+        {
+            InitializeComponent();
+            this.@class = @class.Clone() as Class;
+
+            DataContext = @class;
+            isAddMode = false;
+
+        }
+
         public AddEditClassWindow()
         {
             InitializeComponent();
-            newClass = new Class();
-            DataContext = newClass;
-        }
 
-        private void btnCancel_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            @class = new Class
+            {
+
+                IsDeleted = false
+            };
+
+
+
+            isAddMode = true;
+            DataContext = @class;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            Data.Instance.ClassService.Add(newClass);
-            this.DialogResult = true;
-            this.Close();
+            if (@class.IsValid)
+            {
+                if (isAddMode)
+                {
+                    classService.Add(@class);
+                }
+                else
+                {
+                    classService.Update(@class.Id, @class);
+                }
+
+                DialogResult = true;
+                Close();
+            }
         }
+
+        private void btnCancel_Click(object sender, RoutedEventArgs e)
+        {
+            DialogResult = false;
+            Close();
+        }
+
     }
 }
