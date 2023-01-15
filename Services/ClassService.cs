@@ -1,5 +1,6 @@
 ﻿using SR39_2021_pop2022_2.Models;
 using SR39_2021_pop2022_2.Repositories;
+using SR39_2021_POP2022_2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -15,12 +16,12 @@ namespace SR39_2021_pop2022_2.Services
         public ClassService()
         {
             classRepository = new ClassRepository();
-
+        
         }
 
-        public Class GetById(int id)
+        public List<Class> GetAvailableClass()
         {
-            return classRepository.GetById(id);
+            return classRepository.GetAll().Where(p => p.IsDeleted).ToList();
         }
 
         public List<Class> GetAll()
@@ -28,53 +29,20 @@ namespace SR39_2021_pop2022_2.Services
             return classRepository.GetAll();
         }
 
-        public List<Class> GetAvailableClasses()
+        public void Add(Class @class)
         {
-            return classRepository.GetAll().Where(p => !p.IsDeleted).ToList();
-        }
-
-
-
-        public void Add(Class calss)
-        {
-            if (calss.Id == 0)
-            {
-                calss.Id = classRepository.NextId(classRepository.GetAll());
-            }
-            classRepository.Add(calss);
-
-        }
-
-        public void Set(List<Class> classes)
-        {
-            classRepository.Set(classes);
+            classRepository.Add(@class);
         }
 
         public void Update(int id, Class @class)
         {
             classRepository.Update(id, @class);
-
         }
 
         public void Delete(int id)
         {
 
             classRepository.Delete(id);
-        }
-
-        public List<Class> ListAllClasses()
-        {
-            throw new NotImplementedException();
-        }
-
-        public List<Class> GetAvailableClassesByName(string name)
-        {
-            return classRepository.GetAll().Where(p => !p.IsDeleted && p.Name.Contains(name)).ToList();
-        }
-
-        public List<Class> GetAvailableClassesOrderedByName()
-        {
-            return classRepository.GetAll().Where(p => !p.IsDeleted).OrderBy(p => p.Name).ToList();
         }
     }
 }

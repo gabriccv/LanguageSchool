@@ -5,11 +5,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SR39_2021_pop2022_2.Models
+namespace SR39_2021_POP2022_2.Models
 {
-
-     [Serializable]
-    public class Student : ICloneable
+    [Serializable]
+    public class Administrator : ICloneable
     {
         public int Id { get; set; }
         private User user;
@@ -21,23 +20,23 @@ namespace SR39_2021_pop2022_2.Models
             set
             {
                 user = value;
-                UserId = user.Id; // kada se setuje User tada se setuje i UserId, tako ne moramo kasnije da ih setujemo zasebno
+                UserId = user.Id;
             }
         }
-        
 
         public object Clone()
         {
-            return new Student
+            return new Administrator
             {
-                Id=Id,
+                Id = Id,
                 User = User.Clone() as User
             };
         }
 
         public override string ToString()
         {
-            return $"[Student] {User.FirstName} {User.LastName}, {User.Email}";
+            return $"[Administrator] {User.FirstName} {User.LastName}, {User.Email}";
         }
+
     }
 }

@@ -11,9 +11,7 @@ namespace SR39_2021_pop2022_2.Repositories
     {
         List<Address> GetAll();
         Address GetById(int id);
-        void Add(Address address);
-        void Add(List<Address> addresses);
-        void Set(List<Address> addresses);
+        int Add(Address address);
         void Update(int id, Address address);
         void Delete(int id);
 

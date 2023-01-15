@@ -8,57 +8,131 @@ using System.Runtime.Serialization;
 using System.Text;
 using System.Threading.Tasks;
 using SR39_2021_pop2022_2.Models;
+using System.Data.SqlClient;
+using System.Data;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
-   class AddressRepository : IAddressRepository
+    class AddressRepository : IAddressRepository
     {
-        //private static List<Address> addresses = new List<Address>();
-
-        public void Add(Address address)
+        public int Add(Address address)
         {
-            Data.Instance.Addresses.Add(address);
-            Data.Instance.Save();
-        }
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                conn.Open();
 
-        public void Add(List<Address> newAddresses)
-        {
-            Data.Instance.Addresses.AddRange(newAddresses);
-            Data.Instance.Save();
-        }
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"
+                    insert into dbo.Addresses (Street, StreetNumber, City, Country)
+                    output inserted.Id
+                    values (@Street, @StreetNumber, @City, @Country";
 
-        public void Set(List<Address> newAddresses)
-        {
-            Data.Instance.Addresses = newAddresses;
+                command.Parameters.Add(new SqlParameter("Street", address.Street));
+                command.Parameters.Add(new SqlParameter("StreetNumber", address.StreetNumber));
+                command.Parameters.Add(new SqlParameter("City", address.City));
+                command.Parameters.Add(new SqlParameter("Country", address.Country));
+
+                return (int)command.ExecuteScalar();
+            }
         }
 
         public void Delete(int id)
         {
-            Address address = GetById(id);
-
-            if (address != null)
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
             {
-                address.IsDeleted = true;
-            
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = "update dbo.Addresses set IsDeleted=1 where Id=@id";
+
+                command.Parameters.Add(new SqlParameter("id", id));
+                command.ExecuteNonQuery();
             }
-
-            Data.Instance.Save();
-
         }
 
         public List<Address> GetAll()
         {
-            return Data.Instance.Addresses;
+            List<Address> addresses = new List<Address>();
+
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                string commandText = "select * from dbo.Addresses";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
+
+                DataSet ds = new DataSet();
+
+                dataAdapter.Fill(ds, "Addresses");
+
+                foreach (DataRow row in ds.Tables["Addresses"].Rows)
+                {
+                    var address = new Address
+                    {
+                        Id = (int)row["Id"],
+                        Street = row["Street"] as string,
+                        StreetNumber = row["StreetNumber"] as string,
+                        City = row["City"] as string,
+                        Country = row["Country"] as string,
+                    };
+
+                    addresses.Add(address);
+                }
+            }
+
+            return addresses;
         }
 
         public Address GetById(int id)
         {
-            return Data.Instance.Addresses.Find(u => u.Id == id);
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                string commandText = $"select * from dbo.Address where Id={id}";
+                SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
+
+                DataSet ds = new DataSet();
+
+                dataAdapter.Fill(ds, "Address");
+                if (ds.Tables["Address"].Rows.Count > 0)
+                {
+                    var row = ds.Tables["Address"].Rows[0];
+
+                    var address = new Address
+                    {
+                        Id = (int)row["Id"],
+                        Street = row["Street"] as string,
+                        StreetNumber = row["StreetNumber"] as string,
+                        City = row["City"] as string,
+                        Country = row["Country"] as string,
+                    };
+
+                    return address;
+                }
+            }
+
+            return null;
         }
 
-        public void Update(int id, Address updatedAddress)
+        public void Update(int id, Address address)
         {
-            Data.Instance.Save();
+            using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
+            {
+                conn.Open();
+
+                SqlCommand command = conn.CreateCommand();
+                command.CommandText = @"update dbo.Addresses set 
+                        Street = @Street,
+                        StreetNumber = @StreetNumber,
+                        City = @City,
+                        Country = @Country
+                        where Id=@id";
+
+                command.Parameters.Add(new SqlParameter("id", id));
+                command.Parameters.Add(new SqlParameter("Street", address.Street));
+                command.Parameters.Add(new SqlParameter("StreetNumber", address.StreetNumber));
+                command.Parameters.Add(new SqlParameter("City", address.City));
+                command.Parameters.Add(new SqlParameter("Country", address.Country));
+
+                command.ExecuteNonQuery();
+            }
         }
 
     }

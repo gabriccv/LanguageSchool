@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SR39_2021_pop2022_2.Views;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Linq;
@@ -15,16 +16,36 @@ namespace SR39_2021_pop2022_2.Models
 
 
         public int Id { get; set; }
-        public string Name { get; set; }
-        public Professor Professor { get; set; }
-        public Student Student { get; set; }
-
+        public string Name { get; set;}
         public String DateOfClass { get; set; }
         public String StartOfClass { get; set; }
         public String ClassTime { get; set; }
         public EStatus Status { get; set; }
         public bool IsDeleted { get; set; }
         public bool IsValid { get; set; }
+        private Professor professor;
+        public Professor Professor
+        {
+            get => professor;
+            set
+            {
+                professor = value;
+                ProfessorId = professor?.Id;
+            }
+        }
+        public int? ProfessorId { get; set; }
+
+        private Student student;
+        public Student Student
+        {
+            get => student;
+            set
+            {
+                student = value;
+                StudentId = student?.Id;
+            }
+        }
+        public int? StudentId { get; set; }
 
 
         public Class()
@@ -44,8 +65,8 @@ namespace SR39_2021_pop2022_2.Models
             {
                 Id = Id,
                 Name = Name,
-                Professor = Professor,
-                Student = Student,
+                Professor = Professor?.Clone() as Professor,
+                Student = Student?.Clone() as Student,
                 DateOfClass = DateOfClass,
                 StartOfClass = StartOfClass,
                 ClassTime = ClassTime,
@@ -107,7 +128,7 @@ namespace SR39_2021_pop2022_2.Models
                 }
                 
 
-                return "";
+                return ""; 
             }
         }
 

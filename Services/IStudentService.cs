@@ -11,14 +11,14 @@ namespace SR39_2021_pop2022_2.Services
     interface IStudentService
     {
         List<Student> GetAll();
-        Student GetById(string email);
+        Student GetById(int id);
         List<Student> GetActiveStudents();
-        //List<Student> GetActiveStuedntsByEmail(string email);
+        List<Student> GetActiveStudentsByEmail(string email);
         List<Student> GetActiveStudentsOrderedByEmail();
         void Add(Student student);
-        void Set(List<Student> students);
-        void Update(string email, Student student);
-        void Delete(string email);
-        List<User> ListAllStudents();
+        void Update(int id, Student student);
+        void Delete(int id);
+        List<User> ListAllProfessors();
+
     }
 }

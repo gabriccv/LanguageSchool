@@ -23,7 +23,7 @@ namespace SR39_2021_pop2022_2
         public MainWindow()
         {
             InitializeComponent();
-            Data.Load();
+            
         }
 
         private void btnProfessors_Click(object sender, RoutedEventArgs e)

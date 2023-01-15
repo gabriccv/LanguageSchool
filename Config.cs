@@ -8,7 +8,7 @@ namespace SR39_2021_pop2022_2
 {
     class Config
     {
-        public static readonly string dataFilePath = @"../../Resources/data.bin";
+        public static readonly string CONNECTION_STRING = @"Data Source=(localdb)\MSSQLLocalDB;Initial Catalog=PopSR392021;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
         
     }
 }

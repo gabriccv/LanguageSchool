@@ -14,7 +14,7 @@ namespace SR39_2021_pop2022_2.Services
         private IUserRepository repostory;
 
         public UserService()
-        {   
+        {
             repostory = new UserRepository();
         }
 
@@ -33,19 +33,48 @@ namespace SR39_2021_pop2022_2.Services
             repostory.Add(user);
         }
 
-        public void Set(List<User> users)
+        public void Update(int id, User user)
         {
-            repostory.Set(users);
+            repostory.Update(id, user);
         }
 
-        public void Update(string email, User user)
+        public void Delete(int id)
         {
-            repostory.Update(email, user);
-        }
-
-        public void Delete(string email)
-        {
-            repostory.Delete(email);
+            repostory.Delete(id);
         }
     }
+    //class UserService : IUserService
+    //{
+    //    private IUserRepository repostory;
+
+    //    public UserService()
+    //    {
+    //        repostory = new UserRepository();
+    //    }
+
+    //    public List<User> GetActiveUsers()
+    //    {
+    //        return repostory.GetAll().Where(p => p.IsActive).ToList();
+    //    }
+
+    //    public List<User> GetAll()
+    //    {
+    //        return repostory.GetAll();
+    //    }
+
+    //    public void Add(User user)
+    //    {
+    //        repostory.Add(user);
+    //    }
+
+    //    public void Update(int id, User user)
+    //    {
+    //        repostory.Update(id, user);
+    //    }
+
+    //    public void Delete(int id)
+    //    {
+    //        repostory.Delete(id);
+    //    }
+    //}
 }

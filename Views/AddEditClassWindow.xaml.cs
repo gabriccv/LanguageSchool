@@ -28,7 +28,7 @@ namespace SR39_2021_pop2022_2.Views
             InitializeComponent();
             this.@class = @class.Clone() as Class;
 
-            DataContext = @class;
+            DataContext = this.@class;
             isAddMode = false;
 
         }

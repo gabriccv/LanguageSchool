@@ -67,7 +67,7 @@ namespace SR39_2021_pop2022_2.Views
 
             if (selectedUser != null)
             {
-                studentService.Delete(selectedUser.Email);
+                studentService.Delete(selectedUser.Id);
                 RefreshDataGrid();
             }
         }

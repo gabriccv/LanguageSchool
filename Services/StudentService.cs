@@ -21,9 +21,9 @@ namespace SR39_2021_pop2022_2.Services
             userRepository = new UserRepository();
         }
 
-        public Student GetById(string email)
+        public Student GetById(int id)
         {
-            return studentRepository.GetById(email);
+            return studentRepository.GetById(id);
         }
 
         public List<Student> GetAll()
@@ -36,10 +36,10 @@ namespace SR39_2021_pop2022_2.Services
             return studentRepository.GetAll().Where(p => p.User.IsActive).ToList();
         }
 
-        //public List<Student> GetActiveStudentsByEmail(string email)
-        //{
-        //    return studentRepository.GetAll().Where(p => p.User.IsActive && p.User.Email.Contains(email)).ToList();
-        //}
+        public List<Student> GetActiveStudentsByEmail(string email)
+        {
+            return studentRepository.GetAll().Where(p => p.User.IsActive && p.User.Email.Contains(email)).ToList();
+        }
         public List<Student> GetActiveStudentsOrderedByEmail()
         {
             return studentRepository.GetAll().Where(p => p.User.IsActive).OrderBy(p => p.User.Email).ToList();
@@ -47,28 +47,24 @@ namespace SR39_2021_pop2022_2.Services
 
         public void Add(Student student)
         {
-            userRepository.Add(student.User);
-            studentRepository.Add(student);
+            var userId = userRepository.Add(student.User);
+            student.UserId = userId;
+           studentRepository.Add(student);
         }
 
-        public void Set(List<Student> students)
+        public void Update(int id, Student student)
         {
-            studentRepository.Set(students);
+            userRepository.Update(student.UserId, student.User);
+            studentRepository.Update(id, student);
         }
 
-        public void Update(string email, Student student)
+        public void Delete(int id)
         {
-            userRepository.Update(email, student.User);
-            studentRepository.Update(email, student);
+            userRepository.Delete(id);
+            studentRepository.Delete(id);
         }
 
-        public void Delete(string email)
-        {
-            userRepository.Delete(email);
-            studentRepository.Delete(email);
-        }
-
-        public List<User> ListAllStudents()
+        public List<User> ListAllProfessors()
         {
             throw new NotImplementedException();
         }

@@ -23,11 +23,11 @@ namespace SR39_2021_pop2022_2.Services
             userRepository = new UserRepository();
         }
 
-        public Professor GetById(string email)
+        public Professor GetById(int id)
         {
-            return professorRepository.GetById(email);
+            return professorRepository.GetById(id);
         }
-        
+
         public List<Professor> GetAll()
         {
             return professorRepository.GetAll();
@@ -49,31 +49,85 @@ namespace SR39_2021_pop2022_2.Services
 
         public void Add(Professor professor)
         {
-            userRepository.Add(professor.User);
+            var userId = userRepository.Add(professor.User);
+            professor.UserId = userId;
             professorRepository.Add(professor);
         }
 
-        public void Set(List<Professor> professors)
+        public void Update(int id, Professor professor)
         {
-            professorRepository.Set(professors);
+            userRepository.Update(professor.UserId, professor.User);
+            professorRepository.Update(id, professor);
         }
 
-        public void Update(string email, Professor professor)
+        public void Delete(int id)
         {
-            userRepository.Update(email, professor.User);
-            professorRepository.Update(email, professor);
-        }
-
-        public void Delete(string email)
-        {
-            userRepository.Delete(email);
-            professorRepository.Delete(email);
+            userRepository.Delete(id);
+            professorRepository.Delete(id);
         }
 
         public List<User> ListAllStudents()
         {
             throw new NotImplementedException();
         }
+        //class ProfessorService : IProfessorService
+        //{
+        //    private IProfessorRepository professorRepository;
+        //    private IUserRepository userRepository;
+
+        //    public ProfessorService()
+        //    {
+        //        professorRepository = new ProfessorRepository();
+        //        userRepository = new UserRepository();
+        //    }
+
+        //    public Professor GetById(int id)
+        //    {
+        //        return professorRepository.GetById(id);
+        //    }
+
+        //    public List<Professor> GetAll()
+        //    {
+        //        return professorRepository.GetAll();
+        //    }
+
+        //    public List<Professor> GetActiveProfessors()
+        //    {
+        //        return professorRepository.GetAll().Where(p => p.User.IsActive).ToList();
+        //    }
+
+        //    public List<Professor> GetActiveProfessorsByEmail(string email)
+        //    {
+        //        return professorRepository.GetAll().Where(p => p.User.IsActive && p.User.Email.Contains(email)).ToList();
+        //    }
+        //    public List<Professor> GetActiveProfessorsOrderedByEmail()
+        //    {
+        //        return professorRepository.GetAll().Where(p => p.User.IsActive).OrderBy(p => p.User.Email).ToList();
+        //    }
+
+        //    public void Add(Professor professor)
+        //    {
+        //        var userId = userRepository.Add(professor.User);
+        //        professor.UserId = userId;
+        //        professorRepository.Add(professor);
+        //    }
+
+        //    public void Update(int id, Professor professor)
+        //    {
+        //        userRepository.Update(professor.UserId, professor.User);
+        //        professorRepository.Update(id, professor);
+        //    }
+
+        //    public void Delete(int id)
+        //    {
+        //        userRepository.Delete(id);
+        //        professorRepository.Delete(id);
+        //    }
+
+        //    public List<User> ListAllStudents()
+        //    {
+        //        throw new NotImplementedException();
+        //    }
     }
 }
 

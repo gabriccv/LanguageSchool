@@ -11,10 +11,7 @@ namespace SR39_2021_pop2022_2.Repositories
     {
         List<Class> GetAll();
         Class GetById(int id);
-        int NextId(List<Class> lista);
-        void Add(Class @class);
-        void Add(List<Class> classes);
-        void Set(List<Class> classes);
+        int Add(Class classes);
         void Update(int id, Class @class);
         void Delete(int id);
 

@@ -65,10 +65,9 @@ namespace SR39_2021_pop2022_2.Views
 
             if (selectedUser != null)
             {
-                professorService.Delete(selectedUser.Email);
+                professorService.Delete(selectedUser.Id);
                 RefreshDataGrid();
             }
-
         }
 
         private void RefreshDataGrid()
@@ -83,7 +82,74 @@ namespace SR39_2021_pop2022_2.Views
             {
                 e.Column.Visibility = Visibility.Collapsed;
             }
-
         }
     }
+    //public partial class ShowProfessorsWindow : Window
+    //{
+    //    private ProfessorService professorService = new ProfessorService();
+
+    //    public ShowProfessorsWindow()
+    //    {
+    //        InitializeComponent();
+    //        RefreshDataGrid();
+    //    }
+
+    //    private void miAddProfessor_Click(object sender, RoutedEventArgs e)
+    //    {
+    //        var addEditProfessorWindow = new AddEditProfessorsWindow();
+
+    //        var successeful = addEditProfessorWindow.ShowDialog();
+
+    //        if ((bool)successeful)
+    //        {
+    //            RefreshDataGrid();
+    //        }
+    //    }
+
+    //    private void miUpdateProfessor_Click(object sender, RoutedEventArgs e)
+    //    {
+    //        var selectedIndex = dgProfessors.SelectedIndex;
+
+    //        if (selectedIndex >= 0)
+    //        {
+    //            var professors = professorService.GetAll();
+
+    //            var addEditProfessorWindow = new AddEditProfessorsWindow(professors[selectedIndex]);
+
+    //            var successeful = addEditProfessorWindow.ShowDialog();
+
+    //            if ((bool)successeful)
+    //            {
+    //                RefreshDataGrid();
+    //            }
+    //        }
+    //    }
+
+    //    private void miDeleteProfessor_Click(object sender, RoutedEventArgs e)
+    //    {
+    //        var selectedUser = dgProfessors.SelectedItem as User;
+
+    //        if (selectedUser != null)
+    //        {
+    //            professorService.Delete(selectedUser.Id);
+    //            RefreshDataGrid();
+    //        }
+
+    //    }
+
+    //    private void RefreshDataGrid()
+    //    {
+    //        List<User> users = professorService.GetAll().Select(p => p.User).ToList();
+    //        dgProfessors.ItemsSource = users;
+    //    }
+
+    //    private void dgProfessors_AutoGeneratingColumn(object sender, DataGridAutoGeneratingColumnEventArgs e)
+    //    {
+    //        if (e.PropertyName == "Error" || e.PropertyName == "IsValid")
+    //        {
+    //            e.Column.Visibility = Visibility.Collapsed;
+    //        }
+
+    //    }
+    //}
 }

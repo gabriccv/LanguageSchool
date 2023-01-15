@@ -9,11 +9,10 @@ namespace SR39_2021_pop2022_2.Services
 {
     interface IUserService
     {
-         List<User> GetAll();
+        List<User> GetAll();
         List<User> GetActiveUsers();
         void Add(User user);
-        void Set(List<User> users);
-        void Update(string email, User user);
-        void Delete(string email);
+        void Update(int id, User user);
+        void Delete(int id);
     }
 }

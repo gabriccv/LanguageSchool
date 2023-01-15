@@ -17,10 +17,8 @@ using System.Windows.Shapes;
 
 namespace SR39_2021_pop2022_2.Views
 {
-
     public partial class AddEditProfessorsWindow : Window
     {
-
         private Professor professor;
         private IProfessorService professorService = new ProfessorService();
         private bool isAddMode;
@@ -66,13 +64,12 @@ namespace SR39_2021_pop2022_2.Views
                 }
                 else
                 {
-                    professorService.Update(professor.User.Email, professor);
+                    professorService.Update(professor.Id, professor);
                 }
 
                 DialogResult = true;
                 Close();
             }
-
         }
 
         private void btnCancel_Click(object sender, RoutedEventArgs e)
@@ -81,4 +78,67 @@ namespace SR39_2021_pop2022_2.Views
             Close();
         }
     }
+    //public partial class AddEditProfessorsWindow : Window
+    //{
+
+    //    private Professor professor;
+    //    private IProfessorService professorService = new ProfessorService();
+    //    private bool isAddMode;
+
+    //    public AddEditProfessorsWindow(Professor professor)
+    //    {
+    //        InitializeComponent();
+    //        this.professor = professor.Clone() as Professor;
+
+    //        DataContext = this.professor;
+
+    //        isAddMode = false;
+    //        txtJMBG.IsReadOnly = true;
+    //        txtEmail.IsReadOnly = true;
+    //    }
+
+    //    public AddEditProfessorsWindow()
+    //    {
+    //        InitializeComponent();
+
+    //        var user = new User
+    //        {
+    //            UserType = EUserType.PROFESSOR,
+    //            IsActive = true
+    //        };
+
+    //        professor = new Professor
+    //        {
+    //            User = user
+    //        };
+
+    //        isAddMode = true;
+    //        DataContext = professor;
+    //    }
+
+    //    private void btnSave_Click(object sender, RoutedEventArgs e)
+    //    {
+    //        if (professor.User.IsValid)
+    //        {
+    //            if (isAddMode)
+    //            {
+    //                professorService.Add(professor);
+    //            }
+    //            else
+    //            {
+    //                professorService.Update(professor.Id, professor);
+    //            }
+
+    //            DialogResult = true;
+    //            Close();
+    //        }
+
+    //    }
+
+    //    private void btnCancel_Click(object sender, RoutedEventArgs e)
+    //    {
+    //        DialogResult = false;
+    //        Close();
+    //    }
+    //}
 }

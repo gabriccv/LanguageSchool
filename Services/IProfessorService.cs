@@ -11,14 +11,13 @@ namespace SR39_2021_pop2022_2.Services
     interface IProfessorService
     {
         List<Professor> GetAll();
-        Professor GetById(string email);
+        Professor GetById(int id);
         List<Professor> GetActiveProfessors();
         List<Professor> GetActiveProfessorsByEmail(string email);
         List<Professor> GetActiveProfessorsOrderedByEmail();
         void Add(Professor professor);
-        void Set(List<Professor> professors);
-        void Update(string email, Professor professor);
-        void Delete(string email);
+        void Update(int id, Professor professor);
+        void Delete(int id);
         List<User> ListAllStudents();
 
     }

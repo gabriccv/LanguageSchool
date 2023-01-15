@@ -15,6 +15,27 @@
         <Menu Grid.Row="0" 
               VerticalAlignment="Top" 
               Height="30">
+            <MenuItem Name="miAddStudent" Height="30" Header="Add student" Click="miAddStudent_Click"></MenuItem>
+            <MenuItem Name="miUpdateStudent" Height="30" Header="Update student" Click="miUpdateStudent_Click"></MenuItem>
+            <MenuItem Name="miDeleteStudent" Height="30" Header="Delete student" Click="miDeleteStudent_Click"></MenuItem>
+        </Menu>
+
+        <DataGrid CanUserAddRows="False" 
+                  IsReadOnly="True" 
+                  Grid.Row="1" 
+                  Name="dgStudent" 
+                  Width="800" 
+                  Margin="0,0,-8,0"
+                  AutoGeneratingColumn="dgStudents_AutoGeneratingColumn"/>
+
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" 
+              VerticalAlignment="Top" 
+              Height="30">
             <MenuItem Name="miAddStudent" Height="30" Header="Add Student" Click="miAddStudent_Click"></MenuItem>
             <MenuItem Name="miUpdateStudent" Height="30" Header="Update Student" Click="miUpdateStudent_Click"></MenuItem>
             <MenuItem Name="miDeleteStudent" Height="30" Header="Delete Student" Click="miDeleteStudent_Click"></MenuItem>
@@ -26,7 +47,7 @@
                   Name="dgStudent" 
                   Width="800" 
                   Margin="0,0,-8,0"
-                  AutoGeneratingColumn="dgStudents_AutoGeneratingColumn"/>
+                  AutoGeneratingColumn="dgStudents_AutoGeneratingColumn"/>-->
 
     </Grid>
 </Window>
