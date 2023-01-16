@@ -15,9 +15,35 @@
         <Menu Grid.Row="0" 
               VerticalAlignment="Top" 
               Height="30">
+            <MenuItem Name="miAddAddress" Height="30" Header="Add address" Click="miAddAddress_Click"></MenuItem>
+            <MenuItem Name="miUpdateAddress" Height="30" Header="Update address" Click="miUpdateAddress_Click"></MenuItem>
+
+            <MenuItem Name="miDeleteAddress" Height="30" Header="Delete address" Click="miDeleteAddress_Click"></MenuItem>
+            <MenuItem Name="miPickAddress" Height="30" Header="Pick address" Click="miPickAddress_Click"></MenuItem>
+
+        </Menu>
+
+        <DataGrid CanUserAddRows="False" 
+                  IsReadOnly="True" 
+                  Grid.Row="1" 
+                  Name="dgAddresses" 
+                  Width="800" 
+                  Margin="0,0,-8,0"
+                  AutoGeneratingColumn="dgAddresses_AutoGeneratingColumn"/>
+
+        <!--<Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" 
+              VerticalAlignment="Top" 
+              Height="30">
             <MenuItem Name="miAddAddress" Height="30" Header="Add Address" Click="miAddAddress_Click"></MenuItem>
             <MenuItem Name="miUpdateAddress" Height="30" Header="Update Address" Click="miUpdateAddress_Click"></MenuItem>
             <MenuItem Name="miDeleteAddress" Height="30" Header="Delete Address" Click="miDeleteAddress_Click"></MenuItem>
+            <MenuItem Name="miPickAddress" Height="30" Header="Delete Address" Click="miPickAddress_Click"></MenuItem>
+
         </Menu>
 
         <DataGrid CanUserAddRows="False" 
@@ -26,7 +52,7 @@
                   Name="dgAddress" 
                   Width="800" 
                   Margin="0,0,-8,0"
-                  AutoGeneratingColumn="dgAddress_AutoGeneratingColumn"/>
+                  AutoGeneratingColumn="dgAddress_AutoGeneratingColumn"/>-->
 
     </Grid>
 </Window>

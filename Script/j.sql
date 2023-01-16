@@ -99,13 +99,20 @@ Insert into Users(firstname,lastname, jmbg, email, Password, gender, userType, i
 ('Marija','Maric', 1234567891011, 'maki123@gmail.com', 'Maki123', 1, 0, 1)
 Insert into Users(firstname,lastname, jmbg, email, Password, gender, userType, isActive) values 
 ('Zika','Zikic', 1110987654321, 'zika123@gmail.com', 'Zika123', 1, 1, 0)
+Insert into Users(firstname,lastname, jmbg, email, Password, gender, userType, isActive,AddressId) values 
+('Sava','Savic', 1111111111111, 'sava3@gmail.com', 'Sava123', 1, 1, 0,1)
+
+
+delete from Users where Id=2; 
 
 set identity_insert administrators on
 insert into administrators(id, userId) values (1, 1);
 insert into Addresses(street,StreetNumber,City,Country,IsDeleted) VALUES ('a',5,'aa','aa',0)
 insert into students(UserId) values(3);
+delete from users where Id=2002
 select * from users
 select * from professors
+delete from students where UserId=1013
 select * from students
 select * from Addresses
 select * from schools

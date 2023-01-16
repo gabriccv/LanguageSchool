@@ -4,6 +4,7 @@ using SR39_2021_POP2022_2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows;
@@ -27,8 +28,10 @@ namespace SR39_2021_pop2022_2.Views
         {
             InitializeComponent();
             this.student = student.Clone() as Student;
+            
 
             DataContext = this.student;
+            tbAddress.DataContext = student;
 
             isAddMode = false;
             txtJMBG.IsReadOnly = true;
@@ -52,6 +55,7 @@ namespace SR39_2021_pop2022_2.Views
 
             isAddMode = true;
             DataContext = student;
+            tbAddress.DataContext = student;
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -76,6 +80,15 @@ namespace SR39_2021_pop2022_2.Views
         {
             DialogResult = false;
             Close();
+        }
+        private void btnPickAddress_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAddressWindow aw = new ShowAddressWindow(ShowAddressWindow.State.DOWNLOADING);
+            if (aw.ShowDialog() == true)
+            {
+                student.User.Address = aw.SelectedAddress;
+
+            }
         }
     }
     //public partial class AddEditStudentsWindow : Window

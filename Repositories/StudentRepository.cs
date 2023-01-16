@@ -85,8 +85,8 @@ namespace SR39_2021_pop2022_2.Repositories
                         Gender = (EGender)Enum.Parse(typeof(EGender), row["Gender"] as string),
                         UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
                         IsActive = (bool)row["IsActive"],
-                        //AddressId = (int)row["AddressId"]
-                };
+                        AddressId = (int)row["AddressId"]
+                    };
 
                     var student = new Student
                     {
@@ -127,7 +127,8 @@ namespace SR39_2021_pop2022_2.Repositories
                         JMBG = row["Jmbg"] as string,
                         Gender = (EGender)Enum.Parse(typeof(EGender), row["Gender"] as string),
                         UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
-                        IsActive = (bool)row["IsActive"]
+                        IsActive = (bool)row["IsActive"],
+                        AddressId = (int)row["AddressId"]
                     };
 
                     var student = new Student

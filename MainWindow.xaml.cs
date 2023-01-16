@@ -25,29 +25,46 @@ namespace SR39_2021_pop2022_2
             InitializeComponent();
             
         }
+        private void Registration(object sender, RoutedEventArgs e)
+        {
+            var registrationWindow = new Registration();
+            registrationWindow.ShowDialog();
 
-        private void btnProfessors_Click(object sender, RoutedEventArgs e)
-        {
-            var professorsWindow = new ShowProfessorsWindow();
-            professorsWindow.ShowDialog();
-            //this.Hide();
-        }
-        private void btnStudents_Click(object sender, RoutedEventArgs e)
-        {
-            var studentsWindow = new ShowStudentsWindow();
-            studentsWindow.ShowDialog();
         }
 
-        private void Address_Click(object sender, RoutedEventArgs e)
+        private void Login(object sender, RoutedEventArgs e)
         {
-            var addressWindow = new ShowAddressWindow();
-            addressWindow.ShowDialog();
+
         }
 
-        private void Class_Click(object sender, RoutedEventArgs e)
+        private void Guest(object sender, RoutedEventArgs e)
         {
-            var classWindow = new ShowClassesWindow();
-            classWindow.ShowDialog();
+            var welcomeWindow = new WelcomeWindow();
+            welcomeWindow.ShowDialog();
         }
+
+        //private void btnProfessors_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var professorsWindow = new ShowProfessorsWindow();
+        //    professorsWindow.ShowDialog();
+        //    //this.Hide();
+        //}
+        //private void btnStudents_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var studentsWindow = new ShowStudentsWindow();
+        //    studentsWindow.ShowDialog();
+        //}
+
+        //private void Address_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var addressWindow = new ShowAddressWindow();
+        //    addressWindow.ShowDialog();
+        //}
+
+        //private void Class_Click(object sender, RoutedEventArgs e)
+        //{
+        //    var classWindow = new ShowClassesWindow();
+        //    classWindow.ShowDialog();
+        //}
     }
 }

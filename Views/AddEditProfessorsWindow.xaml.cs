@@ -1,4 +1,5 @@
-﻿using SR39_2021_pop2022_2.Models;
+﻿using Microsoft.VisualBasic.ApplicationServices;
+using SR39_2021_pop2022_2.Models;
 using SR39_2021_pop2022_2.Services;
 using SR39_2021_POP2022_2.Models;
 using System;
@@ -14,6 +15,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using User = SR39_2021_POP2022_2.Models.User;
 
 namespace SR39_2021_pop2022_2.Views
 {
@@ -23,12 +25,16 @@ namespace SR39_2021_pop2022_2.Views
         private IProfessorService professorService = new ProfessorService();
         private bool isAddMode;
 
+
+
         public AddEditProfessorsWindow(Professor professor)
         {
+
             InitializeComponent();
             this.professor = professor.Clone() as Professor;
 
             DataContext = this.professor;
+            tbAddress.DataContext = professor;
 
             isAddMode = false;
             txtJMBG.IsReadOnly = true;
@@ -42,16 +48,20 @@ namespace SR39_2021_pop2022_2.Views
             var user = new User
             {
                 UserType = EUserType.PROFESSOR,
-                IsActive = true
+                IsActive = true,
+
             };
 
             professor = new Professor
             {
                 User = user
+
             };
 
             isAddMode = true;
             DataContext = professor;
+            tbAddress.DataContext = professor;
+
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -76,6 +86,15 @@ namespace SR39_2021_pop2022_2.Views
         {
             DialogResult = false;
             Close();
+        }
+        private void btnPickAddress_Click(object sender, RoutedEventArgs e)
+        {
+            ShowAddressWindow aw = new ShowAddressWindow(ShowAddressWindow.State.DOWNLOADING);
+            if (aw.ShowDialog() == true)
+            {
+                professor.User.Address = aw.SelectedAddress;
+
+            }
         }
     }
     //public partial class AddEditProfessorsWindow : Window
