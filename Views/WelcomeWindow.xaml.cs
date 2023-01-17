@@ -47,6 +47,12 @@ namespace SR39_2021_pop2022_2.Views
             classWindow.ShowDialog();
         }
 
+        private void Language_Click(object sender, RoutedEventArgs e)
+        {
+            var languageWindow = new ShowLanguagesWindow();
+            languageWindow.ShowDialog();
+        }
+
         //private void Registration(object sender, RoutedEventArgs e)
         //{
         //    var registrationWindow = new Registration();

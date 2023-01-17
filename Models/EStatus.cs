@@ -8,6 +8,7 @@ namespace SR39_2021_pop2022_2.Models
 {
     public enum EStatus
     {
-        SOLOBODAN, REZERVISAN
+        SLOBODAN, REZERVISAN
     }
+    
 }

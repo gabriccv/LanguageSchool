@@ -16,10 +16,10 @@ namespace SR39_2021_pop2022_2.Services
 
         void Update(int id, Address address);
         void Delete(int id);
-
+        Address GetById(int id);
 
         //List<Address> GetAll();
-        //Address GetById(int id);
+        
         //List<Address> GetActiveAddresses();
         //List<Address> GetActiveAddressesByCountry(string country);
         //List<Address> GetActiveAddressesOrderedByCountry();

@@ -10,6 +10,7 @@ using System.Threading.Tasks;
 using SR39_2021_pop2022_2.Models;
 using System.Data.SqlClient;
 using System.Data;
+using Microsoft.VisualBasic.ApplicationServices;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
@@ -23,14 +24,15 @@ namespace SR39_2021_pop2022_2.Repositories
 
                 SqlCommand command = conn.CreateCommand();
                 command.CommandText = @"
-                    insert into dbo.Addresses (Street, StreetNumber, City, Country)
+                    insert into dbo.Addresses (Street, StreetNumber, City, Country,IsDeleted)
                     output inserted.Id
-                    values (@Street, @StreetNumber, @City, @Country";
+                    values (@Street, @StreetNumber, @City, @Country,@IsDeleted)";
 
                 command.Parameters.Add(new SqlParameter("Street", address.Street));
                 command.Parameters.Add(new SqlParameter("StreetNumber", address.StreetNumber));
                 command.Parameters.Add(new SqlParameter("City", address.City));
                 command.Parameters.Add(new SqlParameter("Country", address.Country));
+                command.Parameters.Add(new SqlParameter("IsDeleted", address.IsDeleted));
 
                 return (int)command.ExecuteScalar();
             }
@@ -72,6 +74,7 @@ namespace SR39_2021_pop2022_2.Repositories
                         StreetNumber = row["StreetNumber"] as string,
                         City = row["City"] as string,
                         Country = row["Country"] as string,
+                        IsDeleted = (bool)row["IsDeleted"]
                     };
 
                     addresses.Add(address);
@@ -85,15 +88,15 @@ namespace SR39_2021_pop2022_2.Repositories
         {
             using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
             {
-                string commandText = $"select * from dbo.Address where Id={id}";
+                string commandText = $"select * from dbo.Addresses where Id={id}";
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
 
                 DataSet ds = new DataSet();
 
-                dataAdapter.Fill(ds, "Address");
-                if (ds.Tables["Address"].Rows.Count > 0)
+                dataAdapter.Fill(ds, "Addresses");
+                if (ds.Tables["Addresses"].Rows.Count > 0)
                 {
-                    var row = ds.Tables["Address"].Rows[0];
+                    var row = ds.Tables["Addresses"].Rows[0];
 
                     var address = new Address
                     {
@@ -102,6 +105,7 @@ namespace SR39_2021_pop2022_2.Repositories
                         StreetNumber = row["StreetNumber"] as string,
                         City = row["City"] as string,
                         Country = row["Country"] as string,
+                        IsDeleted = (bool)row["IsDeleted"]
                     };
 
                     return address;

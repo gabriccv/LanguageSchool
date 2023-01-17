@@ -24,6 +24,32 @@ namespace SR39_2021_pop2022_2.Views
     {
         private StudentService studentService = new StudentService();
 
+        public enum State { ADMINISTRATION, DOWNLOADING };
+        State state;
+        public Student SelectedStudent = null;
+
+        public ShowStudentsWindow(State state = State.ADMINISTRATION)
+        {
+            InitializeComponent();
+            this.state = state;
+
+            if (state == State.DOWNLOADING)
+            {
+                miAddStudent.Visibility = Visibility.Collapsed;
+                miUpdateStudent.Visibility = Visibility.Collapsed;
+                miDeleteStudent.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                miPickStudent.Visibility = Visibility.Hidden;
+            }
+
+            //dgAddresses.ItemsSource = Data.Instance.Addresses;
+            dgStudent.ItemsSource = studentService.GetAll();
+
+            dgStudent.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
+        }
+
         public ShowStudentsWindow()
         {
             InitializeComponent();
@@ -40,6 +66,12 @@ namespace SR39_2021_pop2022_2.Views
             {
                 RefreshDataGrid();
             }
+        }
+        private void miPickStudent_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedStudent = dgStudent.SelectedItem as Student;
+            this.DialogResult = true;
+            this.Close();
         }
 
         private void miUpdateStudent_Click(object sender, RoutedEventArgs e)

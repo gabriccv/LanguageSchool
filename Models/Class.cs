@@ -51,7 +51,7 @@ namespace SR39_2021_pop2022_2.Models
         public Class()
             {
                 IsDeleted = false;
-                Status = EStatus.SOLOBODAN;
+                Status = EStatus.SLOBODAN;
             }
 
          public override string ToString()

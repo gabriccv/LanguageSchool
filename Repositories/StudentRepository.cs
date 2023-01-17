@@ -10,11 +10,15 @@ using System.Threading.Tasks;
 using SR39_2021_POP2022_2.Models;
 using System.Data.SqlClient;
 using System.Data;
+using SR39_2021_pop2022_2.Services;
+using Microsoft.VisualBasic.ApplicationServices;
+using User = SR39_2021_POP2022_2.Models.User;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
     class StudentRepository : IStudentRepository
     {
+        private IAddressRepository addressRepository;
         public int Add(Student student)
         {
             using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
@@ -65,7 +69,8 @@ namespace SR39_2021_pop2022_2.Repositories
 
             using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
             {
-                string commandText = "select * from dbo.Students s, dbo.Users u where s.UserId=u.id";
+                string commandText = "select s.UserId, u.* , a.* FROM dbo.Students s, dbo.Users u LEFT JOIN dbo.Addresses a " +  
+                    "ON u.AddressId = a.Id where s.UserId = u.id";
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
 
                 DataSet ds = new DataSet();
@@ -74,6 +79,16 @@ namespace SR39_2021_pop2022_2.Repositories
 
                 foreach (DataRow row in ds.Tables["Students"].Rows)
                 {
+                    var address = new Address
+                    {
+                        Id = (int)row["Id"],
+                        Street = row["Street"] as string,
+                        StreetNumber = row["StreetNumber"] as string,
+                        City = row["City"] as string,
+                        Country = row["Country"] as string,
+                        IsDeleted = (bool)row["IsDeleted"]
+                    };
+
                     var user = new User
                     {
                         Id = (int)row["UserId"],
@@ -85,8 +100,10 @@ namespace SR39_2021_pop2022_2.Repositories
                         Gender = (EGender)Enum.Parse(typeof(EGender), row["Gender"] as string),
                         UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
                         IsActive = (bool)row["IsActive"],
-                        AddressId = (int)row["AddressId"]
-                    };
+                        AddressId = (int)row["AddressId"],
+                        Address=address
+                        
+                };
 
                     var student = new Student
                     {

@@ -53,7 +53,8 @@ namespace SR39_2021_pop2022_2.Repositories
 
             using (SqlConnection conn = new SqlConnection(Config.CONNECTION_STRING))
             {
-                string commandText = "select * from dbo.Professors p, dbo.Users u where p.UserId=u.id";
+                string commandText = "select p.UserId, u.* , a.* FROM dbo.Professors p, dbo.Users u LEFT JOIN dbo.Addresses a " +
+                    "ON u.AddressId = a.Id where p.UserId = u.id";
                 SqlDataAdapter dataAdapter = new SqlDataAdapter(commandText, conn);
 
                 DataSet ds = new DataSet();
@@ -62,6 +63,16 @@ namespace SR39_2021_pop2022_2.Repositories
 
                 foreach (DataRow row in ds.Tables["Professors"].Rows)
                 {
+                    var address = new Address
+                    {
+                        Id = (int)row["Id"],
+                        Street = row["Street"] as string,
+                        StreetNumber = row["StreetNumber"] as string,
+                        City = row["City"] as string,
+                        Country = row["Country"] as string,
+                        IsDeleted = (bool)row["IsDeleted"]
+                    };
+
                     var user = new User
                     {
                         Id = (int)row["UserId"],
@@ -73,7 +84,8 @@ namespace SR39_2021_pop2022_2.Repositories
                         Gender = (EGender)Enum.Parse(typeof(EGender), row["Gender"] as string),
                         UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
                         IsActive = (bool)row["IsActive"],
-                        AddressId = (int)row["AddressId"]
+                        AddressId = (int)row["AddressId"],
+                        Address = address
                     };
 
                     var professor = new Professor

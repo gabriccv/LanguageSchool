@@ -11,6 +11,7 @@ using SR39_2021_pop2022_2.CustomException;
 using SR39_2021_pop2022_2.Models;
 using System.Data.SqlClient;
 using System.Data;
+using SR39_2021_pop2022_2.Services;
 
 namespace SR39_2021_pop2022_2.Repositories
 {
@@ -18,6 +19,8 @@ namespace SR39_2021_pop2022_2.Repositories
 
     class UserRepository : IUserRepository
     {
+        public AddressService adressService;
+
         public UserRepository()
         {
         }
@@ -62,6 +65,7 @@ namespace SR39_2021_pop2022_2.Repositories
             }
         }
 
+
         public List<User> GetAll()
         {
             List<User> users = new List<User>();
@@ -77,6 +81,8 @@ namespace SR39_2021_pop2022_2.Repositories
 
                 foreach (DataRow row in ds.Tables["Users"].Rows)
                 {
+                    string AddressId = row["AddressId"] as string;
+                    Address address = adressService.GetById(int.Parse(AddressId));
                     var user = new User
                     {
                         Id = (int)row["Id"],
@@ -87,7 +93,8 @@ namespace SR39_2021_pop2022_2.Repositories
                         JMBG = row["Jmbg"] as string,
                         Gender = (EGender)Enum.Parse(typeof(EGender), row["Gender"] as string),
                         UserType = (EUserType)Enum.Parse(typeof(EUserType), row["UserType"] as string),
-                        IsActive = (bool)row["IsActive"]
+                        IsActive = (bool)row["IsActive"],
+                        Address=address
                     };
 
                     users.Add(user);

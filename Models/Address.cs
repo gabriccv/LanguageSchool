@@ -14,10 +14,20 @@ namespace SR39_2021_POP2022_2.Models
         public string StreetNumber { get; set; }
         public string City { get; set; }
         public string Country { get; set; }
-        public bool IsValid { get; set; }
+        //public bool IsValid { get; set; }
         public bool IsDeleted { get; set; }
 
 
+       
+        public Address()
+                {
+                    IsDeleted = false;
+            
+                }
+        public override string ToString()
+        {
+            return $"{Street} {StreetNumber}, {City}, {Country}";
+        }
         public object Clone()
         {
             return new Address
@@ -29,15 +39,7 @@ namespace SR39_2021_POP2022_2.Models
                 Country = Country
             };
         }
-        public Address()
-                {
-                    IsDeleted = false;
-            
-                }
-        public override string ToString()
-        {
-            return $"{Street} {StreetNumber}, {City}, {Country}";
-        }
+
 
         public string Error
         {
@@ -65,37 +67,39 @@ namespace SR39_2021_POP2022_2.Models
             }
         }
 
-        public string this[string columnName]
-        {
+        //public string this[string columnName]
+        //{
 
-            get
-            {
-                IsValid = true;
-                if (columnName == "Street" && string.IsNullOrEmpty(Street))
-                {
-                    IsValid = false;
-                    return "Street cannot be empty!";
-                }
-                else if (columnName == "StreetNumber" && string.IsNullOrEmpty(StreetNumber))
-                {
-                    IsValid = false;
-                    return "Street number cannot be empty!";
-                }
-                else if (columnName == "City" && string.IsNullOrEmpty(City))
-                {
-                    IsValid = false;
-                    return "City name cannot be empty!";
-                }
-                else if (columnName == "Country" && string.IsNullOrEmpty(Country))
-                {
-                    IsValid = false;
-                    return "Country cannot be empty!";
-                }
+        //    get
+        //    {
+        //        IsValid = true;
+        //        if (columnName == "Street" && string.IsNullOrEmpty(Street))
+        //        {
+        //            IsValid = false;
+                    
+        //            return "Street cannot be empty!";
+        //        }
+                
+        //        else if (columnName == "StreetNumber" && string.IsNullOrEmpty(StreetNumber))
+        //        {
+        //            IsValid = false;
+        //            return "Street number cannot be empty!";
+        //        }
+        //        else if (columnName == "City" && string.IsNullOrEmpty(City))
+        //        {
+        //            IsValid = false;
+        //            return "City name cannot be empty!";
+        //        }
+        //        else if (columnName == "Country" && string.IsNullOrEmpty(Country))
+        //        {
+        //            IsValid = false;
+        //            return "Country cannot be empty!";
+        //        }
                 
 
-                return "";
-            }
-        }
+        //        return "";
+        //    }
+        //}
     }
 }
 

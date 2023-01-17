@@ -68,7 +68,6 @@
     <Compile Include="Config.cs" />
     <Compile Include="CustomException\UserNotFoundException.cs" />
     <Compile Include="Models\Administrator.cs" />
-    <Compile Include="Models\Aplication.cs" />
     <Compile Include="Models\Class.cs" />
     <Compile Include="Models\EStatus.cs" />
     <Compile Include="Models\Language.cs" />
@@ -77,10 +76,12 @@
     <Compile Include="Repositories\ClassRepository.cs" />
     <Compile Include="Repositories\IAddressRepository.cs" />
     <Compile Include="Repositories\IClassRepository.cs" />
+    <Compile Include="Repositories\ILanguageRepository.cs" />
     <Compile Include="Repositories\IProfessorRepository.cs" />
     <Compile Include="Repositories\ISchoolRepository.cs" />
     <Compile Include="Repositories\IStudentRepository.cs" />
     <Compile Include="Repositories\IUserRepository.cs" />
+    <Compile Include="Repositories\LanguageRepository.cs" />
     <Compile Include="Repositories\ProfessorRepository.cs" />
     <Compile Include="Repositories\SchoolRepository.cs" />
     <Compile Include="Repositories\StudentRepository.cs" />
@@ -89,10 +90,12 @@
     <Compile Include="Services\ClassService.cs" />
     <Compile Include="Services\IAddressService.cs" />
     <Compile Include="Services\IClassService.cs" />
+    <Compile Include="Services\ILanguageService.cs" />
     <Compile Include="Services\IProfessorService.cs" />
     <Compile Include="Services\ISchoolService.cs" />
     <Compile Include="Services\IStudentService.cs" />
     <Compile Include="Services\IUserService.cs" />
+    <Compile Include="Services\LanguageService.cs" />
     <Compile Include="Services\ProfessorService.cs" />
     <Compile Include="Services\SchoolService.cs" />
     <Compile Include="Services\StudentService.cs" />
@@ -103,14 +106,14 @@
     <Compile Include="Views\AddEditClassWindow.xaml.cs">
       <DependentUpon>AddEditClassWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddEditLanguageWindow.xaml.cs">
+      <DependentUpon>AddEditLanguageWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddEditProfessorsWindow.xaml.cs">
       <DependentUpon>AddEditProfessorsWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\AddEditStudentsWindow.xaml.cs">
       <DependentUpon>AddEditStudentsWindow.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Views\AddressPick.xaml.cs">
-      <DependentUpon>AddressPick.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
@@ -120,6 +123,9 @@
     </Compile>
     <Compile Include="Views\ShowClassesWindow.xaml.cs">
       <DependentUpon>ShowClassesWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowLanguagesWindow.xaml.cs">
+      <DependentUpon>ShowLanguagesWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShowProfessorsWindow.xaml.cs">
       <DependentUpon>ShowProfessorsWindow.xaml</DependentUpon>
@@ -150,15 +156,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddEditLanguageWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddEditProfessorsWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\AddEditStudentsWindow.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="Views\AddressPick.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -171,6 +177,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShowClassesWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowLanguagesWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -189,7 +199,6 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Models\Address.cs" />
-    <Compile Include="Models\Data.cs" />
     <Compile Include="Models\EGender.cs" />
     <Compile Include="Models\EUserType.cs" />
     <Compile Include="Models\Professor.cs" />

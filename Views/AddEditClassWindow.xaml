@@ -18,6 +18,8 @@
             <RowDefinition Height="37*"></RowDefinition>
             <RowDefinition Height="37*"></RowDefinition>
             <RowDefinition Height="37*"></RowDefinition>
+            <RowDefinition Height="37*"></RowDefinition>
+            <RowDefinition Height="37*"></RowDefinition>
             <RowDefinition Height="234*"></RowDefinition>
         </Grid.RowDefinitions>
 
@@ -48,14 +50,34 @@
                HorizontalAlignment="Right" Width="43"></Label>
 
         <TextBox Grid.Column="1" Grid.Row="4" Name="txtTimeOfClass"  Margin="5,5,5,5" Text="{Binding Path =ClassTime, ValidatesOnDataErrors=True}"></TextBox>
+        <Label Grid.Row="5" Grid.Column="0" HorizontalAlignment="Right" VerticalAlignment="Center">Status:</Label>
+        <ComboBox Name="cbStatus" Grid.Row="5" Grid.Column="1" Margin="5,5,200,5" Text="{Binding Path=Status}">
+            <ComboBoxItem>SLOBODAN</ComboBoxItem>
+            <ComboBoxItem>REZERVISAN</ComboBoxItem>
+        </ComboBox>
 
-        <Label Grid.Column="0" Grid.Row="4" 
-               Name="lblIsDeleted" 
-               Content="Is Deleted:"
-               HorizontalAlignment="Left" Width="67" Grid.ColumnSpan="2" Margin="119,35,0,0" Grid.RowSpan="2"></Label>
+        <Label Grid.Row="6" 
+               Name="lblProfessor" 
+               Content="Professor:"
+               HorizontalAlignment="Left" Width="62" Margin="124,1,0,55" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
 
-        <Button Name="btnCancel" Grid.Column="1" Grid.Row="6" Height="50" Width="100" Margin="117,149,122,35" Click="btnCancel_Click">Cancel</Button>
-        <Button Name="btnSave" Grid.Column="1" Grid.Row="6" Height="50" Width="100" Margin="222,149,17,35" Click="btnSave_Click">Save</Button>
-        <CheckBox Grid.Column="1" Content="CheckBox" HorizontalAlignment="Left" Margin="10,0,0,0" Grid.Row="5" VerticalAlignment="Center" Height="15" Width="16"/>
+        <TextBlock FontSize="20" Height="23" HorizontalAlignment="Left" Margin="5,5,344,5" Name="lbProfessor" Text="Professor" VerticalAlignment="Top" Width="60" />
+
+        <TextBox  Grid.Column="1" Grid.Row="6" Text="{Binding Path=Professor, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="tbProfessor" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+        <Button Content="..."  Grid.Column="1" Grid.Row="6" HorizontalAlignment="Left" Margin="74,0,0,9" Name="btnPickProfessor" Width="30" Click="btnPickProfessor_Click" RenderTransformOrigin="0.671,-0.023" Height="23" VerticalAlignment="Bottom" />
+
+        <Label Grid.Row="7" 
+               Name="lblStudent" 
+               Content="Student:"
+               HorizontalAlignment="Left" Width="62" Margin="124,1,0,55" Grid.RowSpan="3" Grid.ColumnSpan="2"/>
+
+        <TextBlock FontSize="20" Height="23" HorizontalAlignment="Left" Margin="5,5,344,5" Name="lbStudent" Text="Student" VerticalAlignment="Top" Width="60" />
+
+        <TextBox  Grid.Column="1" Grid.Row="7" Text="{Binding Path=Student, Mode=OneWay,ValidatesOnDataErrors=True}" Height="23"  Margin="4,3,0,0" HorizontalAlignment="Left" Name="tbStudent" VerticalAlignment="Top" Width="50" IsReadOnly="True" />
+        <Button Content="..."  Grid.Column="1" Grid.Row="7" Height="23" HorizontalAlignment="Left" Margin="74,2,0,0" Name="btnPickStudent" VerticalAlignment="Top" Width="30" Click="btnPickStudent_Click" RenderTransformOrigin="0.671,-0.023" />
+
+
+        <Button Name="btnCancel" Grid.Column="1" Grid.Row="8" Height="50" Width="100" Margin="254,124,260,40" Click="btnCancel_Click">Cancel</Button>
+        <Button Name="btnSave" Grid.Column="1" Grid.Row="8" Height="50" Width="100" Margin="359,124,155,40" Click="btnSave_Click">Save</Button>
     </Grid>
 </Window>

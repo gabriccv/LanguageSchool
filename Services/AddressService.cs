@@ -41,16 +41,16 @@ namespace SR39_2021_pop2022_2.Services
 
             addressRepository.Delete(id);
         }
-
+        public Address GetById(int id)
+        {
+            return addressRepository.GetById(id);
+        }
 
 
 
         //        public AddressService() => addressRepository = new AddressRepository();
 
-        //        public Address GetById(int id)
-        //        {
-        //            return addressRepository.GetById(id);
-        //        }
+         
 
         //        public List<Address> GetAll()
         //        {

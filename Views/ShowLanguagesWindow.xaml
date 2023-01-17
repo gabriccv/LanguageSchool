@@ -1,0 +1,35 @@
+﻿<Window x:Class="SR39_2021_pop2022_2.Views.ShowLanguagesWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:local="clr-namespace:SR39_2021_pop2022_2.Views"
+        mc:Ignorable="d"
+        Title="ShowLanguagesWindow" Height="450" Width="800">
+    <Grid>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="30"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+
+        <Menu Grid.Row="0" 
+              VerticalAlignment="Top" 
+              Height="30">
+            <MenuItem Name="miAddLanguage" Height="30" Header="Add language" Click="miAddLanguage_Click"></MenuItem>
+            <MenuItem Name="miUpdateLanguage" Height="30" Header="Update language" Click="miUpdateLanguage_Click"></MenuItem>
+
+            <MenuItem Name="miDeleteLanguage" Height="30" Header="Delete language" Click="miDeleteLanguage_Click"></MenuItem>
+            <MenuItem Name="miPickLanguage" Height="30" Header="Pick language" Click="miPickLanguage_Click"></MenuItem>
+
+        </Menu>
+
+        <DataGrid CanUserAddRows="False" 
+                  IsReadOnly="True" 
+                  Grid.Row="1" 
+                  Name="dgLanguages" 
+                  Width="800" 
+                  Margin="0,0,-8,0"
+                  AutoGeneratingColumn="dgLanguages_AutoGeneratingColumn"/>
+
+    </Grid>
+</Window>

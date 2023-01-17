@@ -5,7 +5,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:local="clr-namespace:SR39_2021_pop2022_2.Views"
         mc:Ignorable="d"
-        Title="AddEditAddressWindow" Height="450" Width="800">
+        Title="AddEditAddressWindow" Height="550" Width="800">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition Width="23*"></ColumnDefinition>
@@ -26,32 +26,31 @@
                Content="Street:"
                HorizontalAlignment="Left" Width="110" Grid.ColumnSpan="2" Margin="76,0,0,0"></Label>
 
-        <TextBox Grid.Column="1" Grid.Row="0" Name="txtStreet" Margin="5,5,5,5" Text="{Binding Path = Address.Street, ValidatesOnDataErrors=True}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="0" Name="txtStreet" Margin="5,5,5,5" Text="{Binding Path =Street, ValidatesOnDataErrors=True}" ></TextBox>
         <Label Grid.Column="0" 
                Name="lblStreetNumber" 
                Content="Street Number:"
                HorizontalAlignment="Left" Width="110" Grid.ColumnSpan="2" Margin="76,42,0,0" Grid.RowSpan="2"/>
 
-        <TextBox Grid.Column="1" Grid.Row="1" Name="txtStreetNubmer"  Margin="5,5,5,5" Text="{Binding Path=Address.StreetNumber, ValidatesOnDataErrors=True}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="1" Name="txtStreetNubmer"  Margin="5,5,5,5" Text="{Binding Path=StreetNumber, ValidatesOnDataErrors=True}"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="1" 
                Name="lblCity" 
                Content="City:"
                HorizontalAlignment="Left" Width="110" Grid.ColumnSpan="2" Margin="76,42,0,0" Grid.RowSpan="2"></Label>
 
-        <TextBox Grid.Column="1" Grid.Row="2" Name="txtCity"  Margin="5,5,5,5" Text="{Binding Path=Address.City, ValidatesOnDataErrors=True}"></TextBox>
+        <TextBox Grid.Column="1" Grid.Row="2" Name="txtCity"  Margin="5,5,5,5" Text="{Binding Path=City, ValidatesOnDataErrors=True}"></TextBox>
 
         <Label Grid.Column="0" Grid.Row="2" 
                Name="lblCountry" 
                Content="Country:"
                HorizontalAlignment="Left" Width="110" Grid.ColumnSpan="2" Margin="76,42,0,0" Grid.RowSpan="2"></Label>
 
-        <TextBox Grid.Column="1" Grid.Row="3" Name="txtCountry"  Margin="5,5,5,5" Text="{Binding Path=Address.Country, ValidatesOnDataErrors=True}"></TextBox>
-        <Label Content="Id:" HorizontalAlignment="Left" Margin="93,0,0,0" Grid.Row="4" VerticalAlignment="Center" Width="110" Grid.ColumnSpan="2" Height="39"/>
-        <TextBox Grid.Column="1" Grid.Row="4" x:Name="txtCountry_Copy"  Margin="5,5,5,5" Text="{Binding Address.Country, ValidatesOnDataErrors=True}"/>
+        <TextBox Grid.Column="1" Grid.Row="3" Name="txtCountry"  Margin="5,5,5,5" Text="{Binding Path=Country, ValidatesOnDataErrors=True}"></TextBox>
 
-        <Button Name="btnSave" Grid.Column="1" Grid.Row="6" Height="50" Width="100" Margin="222,149,17,35" Click="btnSave_Click">Save</Button>
 
-        <Button Name="btnCancel" Grid.Column="1" Grid.Row="6" Height="50" Width="100" Margin="117,149,122,35" Click="btnCancel_Click">Cancel</Button>
+        <Button Grid.Column="1" Grid.Row="9" Width="100" Margin="342,31,172,73" Click="btnCancel_Click">Cancel</Button>
+        <Button Name="btnSave" Grid.Column="1" Grid.Row="9" Width="100" Margin= "214,31,300,73" Click="btnSave_Click">Save</Button>
+
     </Grid>
 </Window>

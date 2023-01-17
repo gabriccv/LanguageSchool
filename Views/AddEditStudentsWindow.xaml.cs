@@ -23,12 +23,13 @@ namespace SR39_2021_pop2022_2.Views
         private Student student;
         private IStudentService studentService = new StudentService();
         private bool isAddMode;
+        
 
         public AddEditStudentsWindow(Student student)
         {
             InitializeComponent();
             this.student = student.Clone() as Student;
-            
+
 
             DataContext = this.student;
             tbAddress.DataContext = student;
@@ -55,7 +56,11 @@ namespace SR39_2021_pop2022_2.Views
 
             isAddMode = true;
             DataContext = student;
-            tbAddress.DataContext = student;
+            
+            
+
+            //tbAddress.DataContext = student;
+
         }
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
@@ -86,10 +91,14 @@ namespace SR39_2021_pop2022_2.Views
             ShowAddressWindow aw = new ShowAddressWindow(ShowAddressWindow.State.DOWNLOADING);
             if (aw.ShowDialog() == true)
             {
-                student.User.Address = aw.SelectedAddress;
+              student.User.Address = aw.SelectedAddress;  
 
             }
+            
+            
         }
+
+
     }
     //public partial class AddEditStudentsWindow : Window
     //{

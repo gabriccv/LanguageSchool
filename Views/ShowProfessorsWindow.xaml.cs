@@ -22,10 +22,30 @@ namespace SR39_2021_pop2022_2.Views
     {
         private ProfessorService professorService = new ProfessorService();
 
-        public ShowProfessorsWindow()
+        public enum State { ADMINISTRATION, DOWNLOADING };
+        State state;
+        public Professor SelectedProfessor = null;
+
+        public ShowProfessorsWindow(State state = State.ADMINISTRATION)
         {
             InitializeComponent();
-            RefreshDataGrid();
+            this.state = state;
+
+            if (state == State.DOWNLOADING)
+            {
+                miAddProfessor.Visibility = Visibility.Collapsed;
+                miUpdateProfessor.Visibility = Visibility.Collapsed;
+                miDeleteProfessor.Visibility = Visibility.Collapsed;
+            }
+            else
+            {
+                miPickProfessor.Visibility = Visibility.Hidden;
+            }
+
+            //dgAddresses.ItemsSource = Data.Instance.Addresses;
+            dgProfessors.ItemsSource = professorService.GetAll();
+
+            dgProfessors.ColumnWidth = new DataGridLength(1, DataGridLengthUnitType.Star);
         }
 
         private void miAddProfessor_Click(object sender, RoutedEventArgs e)
@@ -38,6 +58,18 @@ namespace SR39_2021_pop2022_2.Views
             {
                 RefreshDataGrid();
             }
+        }
+        public ShowProfessorsWindow()
+        {
+            InitializeComponent();
+            RefreshDataGrid();
+        }
+
+        private void miPickProfessor_Click(object sender, RoutedEventArgs e)
+        {
+            SelectedProfessor = dgProfessors.SelectedItem as Professor;
+            this.DialogResult = true;
+            this.Close();
         }
 
         private void miUpdateProfessor_Click(object sender, RoutedEventArgs e)

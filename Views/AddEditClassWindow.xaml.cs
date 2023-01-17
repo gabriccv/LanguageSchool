@@ -73,5 +73,23 @@ namespace SR39_2021_pop2022_2.Views
             Close();
         }
 
+        private void btnPickProfessor_Click(object sender, RoutedEventArgs e)
+        {
+            ShowProfessorsWindow aw = new ShowProfessorsWindow(ShowProfessorsWindow.State.DOWNLOADING);
+            if (aw.ShowDialog() == true)
+            {
+                @class.Professor = aw.SelectedProfessor;
+
+            }
+        }
+        private void btnPickStudent_Click(object sender, RoutedEventArgs e)
+        {
+            ShowStudentsWindow aw = new ShowStudentsWindow(ShowStudentsWindow.State.DOWNLOADING);
+            if (aw.ShowDialog() == true)
+            {
+                @class.Student = aw.SelectedStudent;
+
+            }
+        }
     }
 }

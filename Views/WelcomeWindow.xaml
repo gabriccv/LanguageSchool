@@ -13,13 +13,14 @@
 
             <Button Name="btnStudents"
                 Click="btnStudents_Click" Margin="123,90,493,258">Students</Button>
-            <Button Content="Address" HorizontalAlignment="Left" Margin="136,238,0,0" VerticalAlignment="Top" Height="76" Width="158" Click="Address_Click"/>
-            <Button Content="Class" HorizontalAlignment="Left" Margin="412,238,0,0" VerticalAlignment="Top" Height="86" Width="168" Click="Class_Click"/>
+            <Button Content="Address" HorizontalAlignment="Left" Margin="57,238,0,0" VerticalAlignment="Top" Height="76" Width="158" Click="Address_Click"/>
+            <Button Content="Class" HorizontalAlignment="Left" Margin="504,233,0,0" VerticalAlignment="Top" Height="86" Width="168" Click="Class_Click"/>
+            <Button Content="Language" HorizontalAlignment="Left" Margin="285,254,0,0" VerticalAlignment="Top" Height="44" Width="115" Click="Language_Click"/>
 
 
 
 
-        <!--<Button Content="Registration" HorizontalAlignment="Left" Height="69" Margin="97,127,0,0" VerticalAlignment="Top" Width="200" Click="Registration"/>
+            <!--<Button Content="Registration" HorizontalAlignment="Left" Height="69" Margin="97,127,0,0" VerticalAlignment="Top" Width="200" Click="Registration"/>
         <Button Content="Login" HorizontalAlignment="Left" Height="69" Margin="464,127,0,0" VerticalAlignment="Top" Width="206" Click="Login"/>
         <Button Content="Guest" HorizontalAlignment="Left" Height="81" Margin="315,250,0,0" VerticalAlignment="Top" Width="141" Click="Guest"/>-->
         </Grid>

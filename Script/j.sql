@@ -74,12 +74,25 @@ CREATE TABLE dbo.Lessons
  CONSTRAINT FK_STUDENTS_LESSONS
  FOREIGN KEY(StudentId) REFERENCES dbo.Students (Id)
 )
-CREATE TABLE dbo.Languages
+CREATE TABLE dbo.Class
 (
  Id INT NOT NULL IDENTITY(1,1) PRIMARY KEY,
- NameOfLanguage VARCHAR(50) NOT NULL,
+ Name VARCHAR(50) NOT NULL, 
+ DateOfClass VARCHAR(50) NOT NULL, 
+ StartOfClass VARCHAR(50) NOT NULL,
+ ClassTime VARCHAR(50) NOT NULL,
+ Status BIT NOT NULL,
  IsDeleted BIT NOT NULL,
+ ProfessorId INT, 
+ StudentId INT,
+ 
+ CONSTRAINT FK_PROFESSORS_CLASS
+ FOREIGN KEY(ProfessorId) REFERENCES dbo.Professors (UserId),
+ CONSTRAINT FK_STUDENTS_CLASS
+ FOREIGN KEY(StudentId) REFERENCES dbo.Students (UserId)
 )
+
+
 
 CREATE TABLE dbo.Schools
 (
@@ -120,3 +133,27 @@ select * from lessons
 select * from languages
 select * from Administrators
 
+select s.UserId, u.*,a.* FROM dbo.Students s ,  dbo.Users u LEFT JOIN dbo.Addresses a 
+                    ON u.AddressId=a.Id where s.UserId=u.id
+select * from class;
+select * from professors;
+select * from users
+
+select s.UserId, u.*,a.* FROM dbo.Students s ,  dbo.Users u LEFT JOIN dbo.Addresses a 
+                    ON u.AddressId=a.Id where s.UserId=u.id
+select c.Id,c.Name,c.DateOfClass,c.StartOfClass,c.ClassTime,c.Status,c.IsDeleted,
+p.Id as pId,p.UserId as pUserId,u.FirstName as pFirstName,u.LastName as pLastName,u.Jmbg AS pJmbg,
+u.Email As pEmail, u.Password as pPassword,u.Gender AS pGender,u.UserType as pUserType,u.IsActive AS pIsActive,
+u.AddressId AS pAddressId,
+
+s.Id as sId,s.UserId as sUserId,us.FirstName as sFirstName,us.LastName as sLastName,us.Jmbg AS sJmbg,
+us.Email As sEmail, us.Password as sPassword,us.Gender AS sGender,us.UserType as sUserType,us.IsActive AS sIsActive,
+us.AddressId AS sAddressId
+
+from dbo.Class c 
+left join dbo.Users u  On c.ProfessorId=u.Id left join dbo.Professors p on p.UserId=u.Id 
+left join dbo.Users us on c.StudentId=us.Id left join dbo.Students s on s.UserId=us.Id;
+
+select * from Professors;
+select * from Users;
+select * from Class;

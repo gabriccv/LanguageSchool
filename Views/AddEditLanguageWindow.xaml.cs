@@ -1,6 +1,5 @@
 ﻿using SR39_2021_pop2022_2.Models;
 using SR39_2021_pop2022_2.Services;
-using SR39_2021_POP2022_2.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -17,57 +16,53 @@ using System.Windows.Shapes;
 
 namespace SR39_2021_pop2022_2.Views
 {
-
-    public partial class AddEditAddressWindow : Window
+    public partial class AddEditLanguageWindow : Window
     {
-        private Address address;
-        private IAddressService addressService = new AddressService();
+        private Language language;
+        private ILanguageService languageService = new LanguageService();
         private bool isAddMode;
 
-        public AddEditAddressWindow(Address address)
+        public AddEditLanguageWindow(Language language)
         {
             InitializeComponent();
-            this.address = address.Clone() as Address;
+            this.language = language.Clone() as Language;
 
-            DataContext = this.address;
+            DataContext = this.language;
 
             isAddMode = false;
             //txtId.IsReadOnly = true;
 
         }
 
-        public AddEditAddressWindow()
+        public AddEditLanguageWindow()
         {
             InitializeComponent();
 
-            //var user = new User
-            //{
-            //    UserType = EUserType.PROFESSOR,
-            //    IsActive = true
-            //};
 
-            address = new Address
+            language = new Language
             {
 
                 IsDeleted = false,
             };
 
             isAddMode = true;
-            DataContext = address;
+            DataContext = language;
         }
+
+        
 
         private void btnSave_Click(object sender, RoutedEventArgs e)
         {
-            //    if (address.IsValid)
-            //    {
-            if (isAddMode)
+            //if (language.IsValid)
+            //{
+                if (isAddMode)
                 {
 
-                    addressService.Add(address);
+                    languageService.Add(language);
                 }
                 else
                 {
-                    addressService.Update(address.Id, address);
+                    languageService.Update(language.Id, language);
                 }
 
                 DialogResult = true;
@@ -83,7 +78,7 @@ namespace SR39_2021_pop2022_2.Views
             Close();
         }
 
-        
-        
+
+
     }
 }
