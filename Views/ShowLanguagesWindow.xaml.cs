@@ -53,7 +53,7 @@ namespace SR39_2021_pop2022_2.Views
             RefreshDataGrid();
         }
 
-        private void miPickLanguageb_Click(object sender, RoutedEventArgs e)
+        private void miPickLanguage_Click(object sender, RoutedEventArgs e)
         {
             SelectedLanguage = dgLanguages.SelectedItem as Language;
             this.DialogResult = true;
@@ -117,9 +117,6 @@ namespace SR39_2021_pop2022_2.Views
             }
         }
 
-        private void miPickLanguage_Click(object sender, RoutedEventArgs e)
-        {
-
-        }
+        
     }
 }

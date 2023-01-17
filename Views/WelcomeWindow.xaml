@@ -7,7 +7,7 @@
         mc:Ignorable="d"
         Title="WelcomeWindow" Height="450" Width="800">
     <Grid>
-        <Grid Margin="10,10,-10,-10">
+        <Grid Margin="0,10,0,-10">
             <Button Name="btnProfessors"
                 Click="btnProfessors_Click" Margin="412,90,204,258">Professors</Button>
 
@@ -16,6 +16,7 @@
             <Button Content="Address" HorizontalAlignment="Left" Margin="57,238,0,0" VerticalAlignment="Top" Height="76" Width="158" Click="Address_Click"/>
             <Button Content="Class" HorizontalAlignment="Left" Margin="504,233,0,0" VerticalAlignment="Top" Height="86" Width="168" Click="Class_Click"/>
             <Button Content="Language" HorizontalAlignment="Left" Margin="285,254,0,0" VerticalAlignment="Top" Height="44" Width="115" Click="Language_Click"/>
+            <Button Content="School" HorizontalAlignment="Left" Height="86" Margin="641,90,0,0" VerticalAlignment="Top" Width="115" Click="School_Click"/>
 
 
 

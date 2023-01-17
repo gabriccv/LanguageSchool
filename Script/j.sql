@@ -154,6 +154,9 @@ from dbo.Class c
 left join dbo.Users u  On c.ProfessorId=u.Id left join dbo.Professors p on p.UserId=u.Id 
 left join dbo.Users us on c.StudentId=us.Id left join dbo.Students s on s.UserId=us.Id;
 
-select * from Professors;
-select * from Users;
-select * from Class;
+select * from schools;
+select * from Addresses;
+select * from Languages;
+
+select s.*,a.Street,a.StreetNumber,a.City,a.Country,a.IsDeleted as aIsDeleted,l.NameOfLanguage,l.IsDeleted as lIsDeleted from dbo.Schools s left join dbo.Addresses a on s.AddressId=a.Id left join dbo.Languages l on s.LanguageId=l.Id 
+

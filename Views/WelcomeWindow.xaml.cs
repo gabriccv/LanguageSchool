@@ -53,6 +53,12 @@ namespace SR39_2021_pop2022_2.Views
             languageWindow.ShowDialog();
         }
 
+        private void School_Click(object sender, RoutedEventArgs e)
+        {
+            var schoolWindow = new ShowSchoolWindow();
+            schoolWindow.ShowDialog();
+        }
+
         //private void Registration(object sender, RoutedEventArgs e)
         //{
         //    var registrationWindow = new Registration();

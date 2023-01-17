@@ -27,14 +27,15 @@ namespace SR39_2021_pop2022_2
         }
         private void Registration(object sender, RoutedEventArgs e)
         {
-            var registrationWindow = new Registration();
-            registrationWindow.ShowDialog();
+            var addEditStudentWindow = new AddEditStudentsWindow();
+            addEditStudentWindow.ShowDialog();
 
         }
 
         private void Login(object sender, RoutedEventArgs e)
         {
-
+           // var loginWindow = new LoginWindow();
+           //loginWindow.ShowDialog();
         }
 
         private void Guest(object sender, RoutedEventArgs e)

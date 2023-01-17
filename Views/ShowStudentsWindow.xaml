@@ -15,10 +15,11 @@
         <Menu Grid.Row="0" 
               VerticalAlignment="Top" 
               Height="30">
-            <MenuItem Name="miAddStudent" Height="30" Header="Add student" Click="miAddStudent_Click"></MenuItem>
-            <MenuItem Name="miUpdateStudent" Height="30" Header="Update student" Click="miUpdateStudent_Click"></MenuItem>
-            <MenuItem Name="miDeleteStudent" Height="30" Header="Delete student" Click="miDeleteStudent_Click"></MenuItem>
-            <MenuItem Name="miPickStudent" Height="30" Header="Pick student" Click="miPickStudent_Click"></MenuItem>
+            <MenuItem Name="miAddStudent" Height="30" Header="Add student" Click="miAddStudent_Click" Background="Aqua"></MenuItem>
+            <MenuItem Name="miUpdateStudent" Height="30" Header="Update student" Click="miUpdateStudent_Click" Background="Aqua"></MenuItem>
+            <MenuItem Name="miDeleteStudent" Height="30" Header="Delete student" Click="miDeleteStudent_Click" Background="Aqua"></MenuItem>
+            <MenuItem Name="miPickStudent" Height="30" Header="Pick student" Click="miPickStudent_Click" Background="Aqua"></MenuItem>
+            <TextBox Name="txtSearch"  Margin="5,5,5,5" KeyDown="txtSearch_KeyDown" Height="30" Width="150" Background="Aqua"></TextBox>
 
         </Menu>
 

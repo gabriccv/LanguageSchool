@@ -117,5 +117,24 @@ namespace SR39_2021_pop2022_2.Views
                 e.Column.Visibility = Visibility.Collapsed;
             }
         }
+        private void txtSearch_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.Key == Key.Enter)
+            {
+                string searchTerm = txtSearch.Text;
+                StudentService studService = new StudentService();
+                List<Student> filteredStudents = studService.GetActiveStudents()
+                    .Where(prof => prof.User.FirstName.ToLower().Contains(searchTerm.ToLower())
+                                 || prof.User.LastName.ToLower().Contains(searchTerm.ToLower())
+                                 || prof.User.Email.ToLower().Contains(searchTerm.ToLower())
+                             || prof.User.Address.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
+
+
+                    .ToList();
+
+                dgStudent.ItemsSource = filteredStudents;
+            }
+
+        }
     }
 }

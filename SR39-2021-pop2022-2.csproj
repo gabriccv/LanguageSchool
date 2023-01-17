@@ -112,8 +112,14 @@
     <Compile Include="Views\AddEditProfessorsWindow.xaml.cs">
       <DependentUpon>AddEditProfessorsWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\AddEditSchoolWindow.xaml.cs">
+      <DependentUpon>AddEditSchoolWindow.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Views\AddEditStudentsWindow.xaml.cs">
       <DependentUpon>AddEditStudentsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\LoginWindow.xaml.cs">
+      <DependentUpon>LoginWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\Registration.xaml.cs">
       <DependentUpon>Registration.xaml</DependentUpon>
@@ -129,6 +135,9 @@
     </Compile>
     <Compile Include="Views\ShowProfessorsWindow.xaml.cs">
       <DependentUpon>ShowProfessorsWindow.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\ShowSchoolWindow.xaml.cs">
+      <DependentUpon>ShowSchoolWindow.xaml</DependentUpon>
     </Compile>
     <Compile Include="Views\ShowStudentsWindow.xaml.cs">
       <DependentUpon>ShowStudentsWindow.xaml</DependentUpon>
@@ -164,7 +173,15 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\AddEditSchoolWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\AddEditStudentsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\LoginWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -185,6 +202,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="Views\ShowProfessorsWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\ShowSchoolWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
