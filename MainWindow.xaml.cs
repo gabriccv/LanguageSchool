@@ -34,14 +34,14 @@ namespace SR39_2021_pop2022_2
 
         private void Login(object sender, RoutedEventArgs e)
         {
-           // var loginWindow = new LoginWindow();
-           //loginWindow.ShowDialog();
+            var loginWindow = new LoginWindow();
+            loginWindow.ShowDialog();
         }
 
         private void Guest(object sender, RoutedEventArgs e)
         {
-            var welcomeWindow = new WelcomeWindow();
-            welcomeWindow.ShowDialog();
+            var guestWindow = new GuestsMenu();
+            guestWindow.ShowDialog();
         }
 
         //private void btnProfessors_Click(object sender, RoutedEventArgs e)

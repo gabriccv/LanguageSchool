@@ -13,10 +13,16 @@
 
             <Button Name="btnStudents"
                 Click="btnStudents_Click" Margin="123,90,493,258">Students</Button>
-            <Button Content="Address" HorizontalAlignment="Left" Margin="57,238,0,0" VerticalAlignment="Top" Height="76" Width="158" Click="Address_Click"/>
-            <Button Content="Class" HorizontalAlignment="Left" Margin="504,233,0,0" VerticalAlignment="Top" Height="86" Width="168" Click="Class_Click"/>
-            <Button Content="Language" HorizontalAlignment="Left" Margin="285,254,0,0" VerticalAlignment="Top" Height="44" Width="115" Click="Language_Click"/>
-            <Button Content="School" HorizontalAlignment="Left" Height="86" Margin="641,90,0,0" VerticalAlignment="Top" Width="115" Click="School_Click"/>
+            <Button Name="btnAddress" Content="btnAddress" HorizontalAlignment="Left" Margin="57,238,0,0" VerticalAlignment="Top" Height="76" Width="158" Click="Address_Click"/>
+            <Button Name="btnClass" Content="Class" HorizontalAlignment="Left" Margin="504,233,0,0" VerticalAlignment="Top" Height="86" Width="168" Click="Class_Click"/>
+            <Button Name="btnLanguage" Content="Language" HorizontalAlignment="Left" Margin="285,254,0,0" VerticalAlignment="Top" Height="44" Width="115" Click="Language_Click"/>
+            <Button Name="btnSchool" Content="School" HorizontalAlignment="Left" Height="86" Margin="641,90,0,0" VerticalAlignment="Top" Width="115" Click="School_Click"/>
+            <Button Name="btnLogout" Content="Logout" HorizontalAlignment="Left" Height="30" VerticalAlignment="Top" Width="87" Click="Logout_Click" Margin="27,43,0,0"/>
+            <Button Name="btnSProfessor" Content="Sprofessor" HorizontalAlignment="Left" Margin="441,40,0,0" VerticalAlignment="Top" Height="33" Width="63" Click="Sprofessor_Click"/>
+            <Button Name="btnSStudent" Content="SStudent" HorizontalAlignment="Left" Height="32" Margin="218,41,0,0" VerticalAlignment="Top" Width="89" Click="SStudent_Click"/>
+            <Button Name="btnSSchool" Content="SSchool" HorizontalAlignment="Left" Height="28" Margin="666,45,0,0" VerticalAlignment="Top" Width="90" Click="SSchool_Click"/>
+            <Button Name="btnSClass" Content="SClass" HorizontalAlignment="Left" Height="42" Margin="698,200,0,0" VerticalAlignment="Top" Width="74" Click="SClass_Click"/>
+            <Button Name="btnPProfessor" Content="ProfessorP" HorizontalAlignment="Left" Height="51" Margin="292,0,0,0" VerticalAlignment="Center" Width="108" Click="ProfessorP_Click"/>
 
 
 

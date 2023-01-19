@@ -109,7 +109,7 @@ CREATE TABLE dbo.Schools
 
 
 Insert into Users(firstname,lastname, jmbg, email, Password, gender, userType, isActive) values 
-('Marija','Maric', 1234567891011, 'maki123@gmail.com', 'Maki123', 1, 0, 1)
+('Marija','Maric', 1234567895478, 'admin@gmail.com', 'Admin123', 1, 0, 1)
 Insert into Users(firstname,lastname, jmbg, email, Password, gender, userType, isActive) values 
 ('Zika','Zikic', 1110987654321, 'zika123@gmail.com', 'Zika123', 1, 1, 0)
 Insert into Users(firstname,lastname, jmbg, email, Password, gender, userType, isActive,AddressId) values 
@@ -119,7 +119,7 @@ Insert into Users(firstname,lastname, jmbg, email, Password, gender, userType, i
 delete from Users where Id=2; 
 
 set identity_insert administrators on
-insert into administrators(id, userId) values (1, 1);
+insert into administrators(id, userId) values (2, 7003);
 insert into Addresses(street,StreetNumber,City,Country,IsDeleted) VALUES ('a',5,'aa','aa',0)
 insert into students(UserId) values(3);
 delete from users where Id=2002
@@ -160,3 +160,5 @@ select * from Languages;
 
 select s.*,a.Street,a.StreetNumber,a.City,a.Country,a.IsDeleted as aIsDeleted,l.NameOfLanguage,l.IsDeleted as lIsDeleted from dbo.Schools s left join dbo.Addresses a on s.AddressId=a.Id left join dbo.Languages l on s.LanguageId=l.Id 
 
+select * from Users
+select * from Administrators

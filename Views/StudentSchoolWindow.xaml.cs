@@ -16,61 +16,23 @@ using System.Windows.Shapes;
 
 namespace SR39_2021_pop2022_2.Views
 {
-    public partial class ShowSchoolWindow : Window
+    /// <summary>
+    /// Interaction logic for StudentSchoolWindow.xaml
+    /// </summary>
+    public partial class StudentSchoolWindow : Window
     {
         private SchoolService schoolService = new SchoolService();
 
-        public ShowSchoolWindow()
+        public StudentSchoolWindow()
         {
             InitializeComponent();
             RefreshDataGrid();
 
-            
+
         }
 
 
 
-        private void miAddSchool_Click(object sender, RoutedEventArgs e)
-        {
-            var addEditSchoolWindow = new AddEditSchoolWindow();
-
-            var successeful = addEditSchoolWindow.ShowDialog();
-
-            if ((bool)successeful)
-            {
-                RefreshDataGrid();
-            }
-        }
-
-        private void miUpdateSchool_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedIndex = dgSchools.SelectedIndex;
-
-            if (selectedIndex >= 0)
-            {
-                var schools = schoolService.GetAll();
-
-                var addEditSchoolWindow = new AddEditSchoolWindow(schools[selectedIndex]);
-
-                var successeful = addEditSchoolWindow.ShowDialog();
-
-                if ((bool)successeful)
-                {
-                    RefreshDataGrid();
-                }
-            }
-        }
-
-        private void miDeleteSchool_Click(object sender, RoutedEventArgs e)
-        {
-            var selectedSchool = dgSchools.SelectedItem as School;
-
-            if (selectedSchool != null)
-            {
-                schoolService.Delete(selectedSchool.Id);
-                RefreshDataGrid();
-            }
-        }
 
         private void RefreshDataGrid()
         {
@@ -94,7 +56,7 @@ namespace SR39_2021_pop2022_2.Views
                 SchoolService schoolService = new SchoolService();
                 List<School> filteredSchools = schoolService.GetValidSchool()
                     .Where(school => school.Name.ToLower().Contains(searchTerm.ToLower())
-                                 || school.Language.ToString().Equals(searchTerm,StringComparison.OrdinalIgnoreCase)
+                                 || school.Language.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase)
                              || school.Address.ToString().Equals(searchTerm, StringComparison.OrdinalIgnoreCase))
 
 
