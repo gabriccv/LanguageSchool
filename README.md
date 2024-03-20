@@ -1,5 +1,4 @@
-# Language Learning Center Appointment Management System
-
+# Language School
 This project is developed as part of the Object-Oriented Programming course project for the academic year 2022/2023. It entails building a stand-alone GUI application using the .NET framework and WPF technology for managing individual language learning sessions in language schools.
 
 ## Project Overview
